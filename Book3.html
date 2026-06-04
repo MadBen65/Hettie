@@ -6,6 +6,9 @@
         font-family: Arial, sans-serif;
         margin: 20px;
         background-color: rgba(199, 204, 47, 0.995);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
     }
     h1 {
     color: #3f3f14;
@@ -16,6 +19,98 @@ p {
 }
 img {
     margin-top: 20px;
+}
+
+.lightning-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.lightning-flash {
+    background: radial-gradient(circle at 58% 22%, rgba(255, 255, 255, 0.45) 0%, rgba(180, 220, 255, 0.18) 22%, rgba(180, 220, 255, 0) 45%);
+    animation: skyFlash 5.6s infinite;
+}
+
+.bolt {
+    position: fixed;
+    top: -8px;
+    width: 8px;
+    height: 52vh;
+    background: linear-gradient(to bottom, rgba(245, 252, 255, 0), rgba(245, 252, 255, 0.92) 20%, rgba(201, 236, 255, 0.92) 75%, rgba(201, 236, 255, 0));
+    clip-path: polygon(48% 0%, 67% 13%, 44% 26%, 64% 38%, 39% 50%, 60% 63%, 35% 77%, 53% 91%, 41% 100%, 23% 86%, 44% 71%, 26% 57%, 47% 45%, 30% 31%, 52% 18%, 35% 6%);
+    filter: drop-shadow(0 0 6px rgba(215, 244, 255, 0.95)) drop-shadow(0 0 16px rgba(175, 222, 255, 0.85));
+    opacity: 0;
+}
+
+.bolt-a {
+    left: 18%;
+    transform: rotate(5deg);
+    animation: boltStrikeA 5.6s infinite;
+}
+
+.bolt-b {
+    left: 74%;
+    height: 46vh;
+    transform: rotate(-7deg);
+    animation: boltStrikeB 5.6s infinite;
+}
+
+@keyframes skyFlash {
+    0%, 6%, 9%, 100% {
+        opacity: 0;
+    }
+    6.5% {
+        opacity: 0.82;
+    }
+    7.2% {
+        opacity: 0.15;
+    }
+    8.1% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes boltStrikeA {
+    0%, 6%, 8%, 100% {
+        opacity: 0;
+    }
+    6.3% {
+        opacity: 1;
+    }
+    6.8% {
+        opacity: 0.25;
+    }
+    7.1% {
+        opacity: 0.95;
+    }
+    7.6% {
+        opacity: 0;
+    }
+}
+
+@keyframes boltStrikeB {
+    0%, 8.5%, 10%, 100% {
+        opacity: 0;
+    }
+    8.8% {
+        opacity: 0.92;
+    }
+    9.25% {
+        opacity: 0.2;
+    }
+    9.5% {
+        opacity: 0.75;
+    }
+    9.9% {
+        opacity: 0;
+    }
+}
+
+body > *:not(.lightning-layer) {
+    position: relative;
+    z-index: 2;
 }
 </style>
 <head>
@@ -40,5 +135,8 @@ img {
 <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1713284397i/137847194.jpg" alt="Skandar Book 3 Cover" width="300">
 
 <p></p>
+<div class="lightning-layer lightning-flash" aria-hidden="true"></div>
+<div class="lightning-layer bolt bolt-a" aria-hidden="true"></div>
+<div class="lightning-layer bolt bolt-b" aria-hidden="true"></div>
 </body>
 </html>

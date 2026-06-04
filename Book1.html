@@ -6,6 +6,10 @@
         font-family: Arial, sans-serif;
         margin: 20px;
         background-color: rgba(166, 76, 37, 0.995);
+        min-height: 100vh;
+        position: relative;
+        padding-bottom: 120px;
+        overflow-x: hidden;
     }
     h1 {
     color: #511414;
@@ -16,6 +20,59 @@ p {
 }
 img {
     margin-top: 20px;
+}
+
+.fire-strip {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 125px;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(255, 120, 20, 0.92), rgba(255, 65, 0, 0.78) 55%, rgba(70, 10, 0, 0.85));
+    clip-path: polygon(0% 100%, 0% 68%, 4% 84%, 8% 58%, 12% 82%, 16% 50%, 20% 84%, 24% 60%, 28% 86%, 32% 48%, 36% 81%, 40% 55%, 44% 85%, 48% 45%, 52% 83%, 56% 57%, 60% 86%, 64% 52%, 68% 84%, 72% 59%, 76% 87%, 80% 49%, 84% 82%, 88% 56%, 92% 84%, 96% 62%, 100% 78%, 100% 100%);
+    filter: saturate(1.3);
+    animation: fireFlicker 1.05s infinite alternate ease-in-out;
+}
+
+.fire-strip::before,
+.fire-strip::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.fire-strip::before {
+    background: linear-gradient(to top, rgba(255, 225, 120, 0.85) 8%, rgba(255, 175, 50, 0.7) 40%, rgba(255, 140, 20, 0) 78%);
+    clip-path: polygon(0% 100%, 0% 82%, 5% 68%, 9% 86%, 14% 63%, 19% 88%, 24% 66%, 29% 86%, 34% 61%, 39% 87%, 44% 64%, 49% 84%, 54% 60%, 59% 86%, 64% 64%, 69% 87%, 74% 62%, 79% 85%, 84% 66%, 89% 87%, 94% 70%, 100% 84%, 100% 100%);
+    filter: blur(0.4px);
+    opacity: 0.9;
+}
+
+.fire-strip::after {
+    background: linear-gradient(to top, rgba(255, 255, 220, 0.7) 0%, rgba(255, 220, 140, 0.42) 34%, rgba(255, 190, 110, 0) 62%);
+    clip-path: polygon(0% 100%, 4% 88%, 10% 92%, 16% 78%, 22% 90%, 28% 77%, 34% 90%, 40% 75%, 46% 88%, 52% 76%, 58% 89%, 64% 74%, 70% 88%, 76% 78%, 82% 90%, 88% 80%, 94% 92%, 100% 86%, 100% 100%);
+    filter: blur(1px);
+    opacity: 0.82;
+}
+
+@keyframes fireFlicker {
+    0% {
+        transform: translateY(0) scaleY(1) scaleX(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-5px) scaleY(1.1) scaleX(1.02);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-2px) scaleY(0.95) scaleX(0.99);
+        opacity: 0.93;
+    }
 }
 </style>
 <head>
@@ -40,5 +97,6 @@ img {
 <img src="XL.jpg" alt="Skandar Book 1 Cover" width="300">
 
 <p></p>
+<div class="fire-strip" aria-hidden="true"></div>
 </body>
 </html>
