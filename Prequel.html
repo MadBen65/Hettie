@@ -6,6 +6,9 @@
         font-family: Arial, sans-serif;
         margin: 20px;
         background-color: rgba(60, 70, 95, 0.95);
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
     }
     h1 {
     color: #ffffff;
@@ -17,6 +20,334 @@ p {
 }
 img {
     margin-top: 20px;
+}
+
+.edge-runner {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.unicorn-shadow {
+    position: absolute;
+    width: 132px;
+    height: 84px;
+    left: 0;
+    top: 0;
+    animation: edgeGallop 24s linear infinite;
+}
+
+.unicorn-art {
+    position: absolute;
+    inset: 0;
+    transform: scale(0.42);
+    transform-origin: top left;
+}
+
+.unicorn-body {
+    position: absolute;
+    inset: 0;
+    filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.9));
+    animation: gallopBob 0.45s steps(2, end) infinite;
+}
+
+.torso {
+    position: absolute;
+    left: 20px;
+    top: 34px;
+    width: 66px;
+    height: 28px;
+    background: rgba(7, 7, 10, 0.97);
+    border-radius: 45% 42% 40% 44% / 58% 58% 42% 42%;
+}
+
+.neck-head {
+    position: absolute;
+    left: 73px;
+    top: 18px;
+    width: 40px;
+    height: 24px;
+    background: rgba(7, 7, 10, 0.97);
+    border-radius: 45% 50% 45% 55% / 58% 48% 52% 42%;
+    transform: rotate(-12deg);
+}
+
+.muzzle {
+    position: absolute;
+    left: 106px;
+    top: 20px;
+    width: 18px;
+    height: 11px;
+    background: rgba(7, 7, 10, 0.97);
+    border-radius: 58% 42% 52% 48%;
+    transform: rotate(-10deg);
+}
+
+.ear {
+    position: absolute;
+    width: 7px;
+    height: 11px;
+    background: rgba(7, 7, 10, 0.97);
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+
+.ear-a {
+    left: 93px;
+    top: 12px;
+    transform: rotate(-14deg);
+}
+
+.ear-b {
+    left: 100px;
+    top: 11px;
+    transform: rotate(6deg);
+}
+
+.tail {
+    position: absolute;
+    left: 10px;
+    top: 33px;
+    width: 24px;
+    height: 18px;
+    background: rgba(7, 7, 10, 0.97);
+    clip-path: polygon(100% 24%, 60% 8%, 35% 16%, 8% 38%, 0% 64%, 20% 90%, 45% 100%, 76% 88%, 96% 66%);
+    transform-origin: 100% 35%;
+    animation: tailFlick 0.8s ease-in-out infinite alternate;
+}
+
+.leg {
+    position: absolute;
+    width: 11px;
+    height: 28px;
+    background: rgba(7, 7, 10, 0.97);
+    clip-path: polygon(26% 0%, 74% 0%, 86% 86%, 62% 100%, 36% 100%, 10% 86%);
+    transform-origin: 50% 6%;
+}
+
+.leg-front-a {
+    left: 72px;
+    top: 50px;
+    animation: legStrideA 0.5s ease-in-out infinite;
+}
+
+.leg-front-b {
+    left: 60px;
+    top: 50px;
+    animation: legStrideB 0.5s ease-in-out infinite;
+}
+
+.leg-back-a {
+    left: 35px;
+    top: 52px;
+    animation: legStrideB 0.5s ease-in-out infinite;
+}
+
+.leg-back-b {
+    left: 24px;
+    top: 52px;
+    animation: legStrideA 0.5s ease-in-out infinite;
+}
+
+.wing {
+    position: absolute;
+    width: 52px;
+    height: 34px;
+    background: rgba(101, 93, 86, 0.34);
+    clip-path: polygon(0% 64%, 10% 44%, 21% 34%, 35% 22%, 52% 14%, 74% 9%, 100% 0%, 84% 28%, 69% 47%, 57% 60%, 44% 71%, 25% 84%, 9% 94%);
+    transform-origin: 100% 85%;
+    backdrop-filter: blur(0.6px);
+}
+
+.wing::before,
+.wing::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.wing::before {
+    left: 8px;
+    top: 8px;
+    width: 30px;
+    height: 12px;
+    background: linear-gradient(115deg, rgba(160, 245, 255, 0) 0%, rgba(208, 255, 255, 0.95) 40%, rgba(120, 220, 255, 0) 100%);
+    clip-path: polygon(0% 63%, 20% 50%, 30% 65%, 48% 42%, 61% 56%, 78% 37%, 100% 51%, 82% 67%, 66% 58%, 49% 76%, 35% 62%, 18% 78%);
+    filter: drop-shadow(0 0 4px rgba(185, 245, 255, 0.95)) drop-shadow(0 0 9px rgba(131, 214, 255, 0.78));
+    animation: wingSpark 0.42s steps(2, end) infinite;
+}
+
+.wing::after {
+    left: 20px;
+    top: 16px;
+    width: 22px;
+    height: 9px;
+    background: linear-gradient(105deg, rgba(170, 250, 255, 0) 0%, rgba(225, 255, 255, 0.95) 45%, rgba(130, 230, 255, 0) 100%);
+    clip-path: polygon(0% 54%, 24% 36%, 36% 58%, 58% 30%, 74% 50%, 100% 36%, 84% 66%, 62% 54%, 44% 78%, 28% 61%);
+    filter: drop-shadow(0 0 3px rgba(200, 250, 255, 0.88)) drop-shadow(0 0 8px rgba(138, 220, 255, 0.72));
+    animation: wingSpark 0.58s steps(2, end) infinite reverse;
+}
+
+.wing-back {
+    left: 22px;
+    top: 24px;
+    opacity: 0.42;
+    animation: wingFlap 0.65s ease-in-out infinite alternate;
+}
+
+.wing-front {
+    left: 30px;
+    top: 18px;
+    opacity: 0.58;
+    animation: wingFlap 0.65s ease-in-out infinite alternate-reverse;
+}
+
+.horn-glow {
+    position: absolute;
+        width: 5px;
+        height: 8px;
+    left: 102px;
+    top: 14px;
+    border-radius: 10px;
+    background: linear-gradient(to right, rgba(170, 255, 255, 0), rgba(208, 255, 255, 0.9), rgba(242, 255, 255, 0.95));
+    transform: rotate(-27deg);
+    box-shadow: 0 0 8px rgba(213, 255, 255, 0.85), 0 0 18px rgba(191, 242, 255, 0.65);
+    animation: hornPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes edgeGallop {
+    0% {
+        left: 0;
+        top: 0;
+        transform: rotate(0deg);
+    }
+    24% {
+        left: calc(100vw - 64px);
+        top: 0;
+        transform: rotate(0deg);
+    }
+    25% {
+        left: calc(100vw - 64px);
+        top: 0;
+        transform: rotate(90deg);
+    }
+    49% {
+        left: calc(100vw - 64px);
+        top: calc(100vh - 46px);
+        transform: rotate(90deg);
+    }
+    50% {
+        left: calc(100vw - 64px);
+        top: calc(100vh - 46px);
+        transform: rotate(180deg);
+    }
+    74% {
+        left: 0;
+        top: calc(100vh - 46px);
+        transform: rotate(180deg);
+    }
+    75% {
+        left: 0;
+        top: calc(100vh - 46px);
+        transform: rotate(270deg);
+    }
+    99% {
+        left: 0;
+        top: 0;
+        transform: rotate(270deg);
+    }
+    100% {
+        left: 0;
+        top: 0;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes wingFlap {
+    0% {
+        transform: rotate(-9deg);
+    }
+    100% {
+        transform: rotate(17deg);
+    }
+}
+
+@keyframes wingSpark {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 0.95;
+    }
+    55% {
+        opacity: 0.15;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes hornPulse {
+    0% {
+        opacity: 0.55;
+        transform: rotate(-27deg) scaleX(0.92);
+    }
+    50% {
+        opacity: 1;
+        transform: rotate(-27deg) scaleX(1.06);
+    }
+    100% {
+        opacity: 0.58;
+        transform: rotate(-27deg) scaleX(0.94);
+    }
+}
+
+@keyframes gallopBob {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes tailFlick {
+    0% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        transform: rotate(12deg);
+    }
+}
+
+@keyframes legStrideA {
+    0% {
+        transform: rotate(16deg);
+    }
+    50% {
+        transform: rotate(-16deg);
+    }
+    100% {
+        transform: rotate(16deg);
+    }
+}
+
+@keyframes legStrideB {
+    0% {
+        transform: rotate(-14deg);
+    }
+    50% {
+        transform: rotate(14deg);
+    }
+    100% {
+        transform: rotate(-14deg);
+    }
+}
+
+body > *:not(.edge-runner) {
+    position: relative;
+    z-index: 2;
 }
 </style>
 <head>
@@ -39,6 +370,28 @@ img {
 <h1>The First Unicorn Rider</h1>
 <p>This prequel to the Skandar series explores the story of George Penhaligon the first person to ever stumble upon the island and bond to a unicorn. His bonded unicorn's name is Rebel Spirit he also meets Rose  and her silver unicorn  Silver Shanty.</p>
 <img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781398540552/untitled-novella-9781398540552_hr.jpg" alt="Skandar Prequel Cover" width="300">
+
+<div class="edge-runner" aria-hidden="true">
+    <div class="unicorn-shadow">
+        <div class="unicorn-art">
+            <div class="wing wing-back"></div>
+            <div class="wing wing-front"></div>
+            <div class="unicorn-body">
+                <div class="torso"></div>
+                <div class="neck-head"></div>
+                <div class="muzzle"></div>
+                <div class="ear ear-a"></div>
+                <div class="ear ear-b"></div>
+                <div class="tail"></div>
+                <div class="leg leg-front-a"></div>
+                <div class="leg leg-front-b"></div>
+                <div class="leg leg-back-a"></div>
+                <div class="leg leg-back-b"></div>
+            </div>
+            <div class="horn-glow"></div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
