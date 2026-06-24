@@ -12,7 +12,30 @@
         background-repeat: no-repeat;
     }
     h1 {
-    color: #230368;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+    font-family: "Chiller", "Papyrus", "Comic Sans MS", cursive;
+    font-size: 68px;
+    letter-spacing: 2px;
+    color: #2a0a78;
+    text-shadow:
+        0 1px 0 rgba(245, 240, 255, 0.55),
+        0 6px 10px rgba(23, 5, 63, 0.45),
+        0 14px 20px rgba(19, 5, 54, 0.34);
+}
+
+h1::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(44, 12, 104, 0.95);
+    transform: translateY(14px);
+    clip-path: polygon(0 0, 100% 0, 100% 58%, 93% 58%, 91% 100%, 83% 58%, 69% 58%, 67% 92%, 58% 58%, 45% 58%, 42% 88%, 34% 58%, 22% 58%, 19% 95%, 11% 58%, 0 58%);
+    filter: blur(0.4px);
+    opacity: 0.9;
+    z-index: -1;
 }
 p {
     font-size: 16px;
@@ -29,7 +52,7 @@ img {
 </head>
 <body>
 
-<h1>Menu</h1>
+<h1 data-text="Menu">Menu</h1>
 <a href="Book1.html"><img src="XL.jpg" alt="Skandar Book 1 Cover" width="100"></a><br>
 <a href="Book2.html"><img src="https://m.media-amazon.com/images/I/81ZMIjof2bL._SL1500_.jpg" alt="Skandar Book 2 Cover" width="100"></a><br>
 <a href="Book3.html"><img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1713284397i/137847194.jpg" alt="Skandar Book 3 Cover" width="100"></a><br>

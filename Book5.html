@@ -3,7 +3,7 @@
 
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: ;
         margin: 20px;
         background-color: rgba(130, 90, 160, 0.95);
         min-height: 100vh;
@@ -41,10 +41,71 @@ p {
 }
 
 img {
-    margin-top: 20px;
+    display: block;
     border-radius: 6px;
     box-shadow: 0 0 18px rgba(255, 255, 255, 0.7), 0 0 38px rgba(210, 220, 255, 0.65), 0 0 64px rgba(170, 180, 255, 0.45);
     animation: imageGlowPulse 2.8s ease-in-out infinite;
+}
+
+.portal-frame {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    isolation: isolate;
+}
+
+.portal-frame::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 440px;
+    height: 440px;
+    border-radius: 50%;
+    background:
+        repeating-conic-gradient(from 8deg,
+            rgba(210, 226, 255, 0.58) 0deg 3deg,
+            rgba(210, 226, 255, 0) 3deg 8deg,
+            rgba(128, 111, 239, 0.66) 8deg 11deg,
+            rgba(128, 111, 239, 0) 11deg 17deg,
+            rgba(170, 142, 255, 0.5) 17deg 19deg,
+            rgba(170, 142, 255, 0) 19deg 24deg),
+        repeating-conic-gradient(from 130deg,
+            rgba(100, 88, 226, 0.44) 0deg 2deg,
+            rgba(100, 88, 226, 0) 2deg 7deg,
+            rgba(198, 216, 255, 0.42) 7deg 9deg,
+            rgba(198, 216, 255, 0) 9deg 15deg);
+    filter: blur(2.6px);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 0 49%, rgba(0, 0, 0, 1) 54% 68%, rgba(0, 0, 0, 0) 74%);
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 0 49%, rgba(0, 0, 0, 1) 54% 68%, rgba(0, 0, 0, 0) 74%);
+    opacity: 0.9;
+    z-index: -2;
+    animation: portalSpin 4.4s linear infinite;
+}
+
+.portal-frame::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 372px;
+    height: 372px;
+    border-radius: 50%;
+    background:
+        repeating-conic-gradient(from 220deg,
+            rgba(199, 220, 255, 0.54) 0deg 2deg,
+            rgba(199, 220, 255, 0) 2deg 6deg,
+            rgba(139, 118, 245, 0.68) 6deg 8deg,
+            rgba(139, 118, 245, 0) 8deg 13deg,
+            rgba(173, 146, 255, 0.5) 13deg 15deg,
+            rgba(173, 146, 255, 0) 15deg 20deg),
+        radial-gradient(circle, rgba(174, 156, 255, 0) 48%, rgba(174, 156, 255, 0.54) 58%, rgba(145, 126, 248, 0.82) 64%, rgba(174, 156, 255, 0) 72%);
+    filter: blur(1px);
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 0 52%, rgba(0, 0, 0, 1) 57% 66%, rgba(0, 0, 0, 0) 72%);
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 0) 0 52%, rgba(0, 0, 0, 1) 57% 66%, rgba(0, 0, 0, 0) 72%);
+    mix-blend-mode: screen;
+    z-index: -1;
+    animation: portalSpinReverse 3.2s linear infinite;
 }
 
 @keyframes imageGlowPulse {
@@ -56,6 +117,33 @@ img {
     }
     100% {
         box-shadow: 0 0 14px rgba(255, 255, 255, 0.58), 0 0 30px rgba(210, 220, 255, 0.48), 0 0 52px rgba(170, 180, 255, 0.35);
+    }
+}
+
+@keyframes portalSpin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.98);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.02);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(0.98);
+    }
+}
+
+@keyframes portalSpinReverse {
+    0% {
+        transform: translate(-50%, -50%) rotate(360deg) scale(1);
+        opacity: 0.74;
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(180deg) scale(1.03);
+        opacity: 0.92;
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+        opacity: 0.74;
     }
 }
 
@@ -83,7 +171,9 @@ body > *:not(.starfield) {
 
 <h1>Skandar Book 5</h1>
 <p>Skandar is about a boy named Skandar Smith who embarks on an epic journey with blood thirsty unicorns, in this final book Skandar faces an epic war against the silvers and the non-spying sentinels he faces this war with almost 90% of the island's population.</p>
-<img src="https://tse4.mm.bing.net/th/id/OIP.uQzWbSGjVEWut4jVVbOvIwHaLO?r=0&cb=thfvnextfalcon&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Skandar Book 5 Cover" width="300">
+<div class="portal-frame">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.uQzWbSGjVEWut4jVVbOvIwHaLO?r=0&cb=thfvnextfalcon&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Skandar Book 5 Cover" width="300">
+</div>
 
 <div class="starfield" id="starfield" aria-hidden="true"></div>
 

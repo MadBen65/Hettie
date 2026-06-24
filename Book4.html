@@ -87,6 +87,115 @@ body > * {
     position: relative;
     z-index: 1;
 }
+
+.forest-ribbon {
+    position: fixed;
+    left: -6%;
+    bottom: 0;
+    width: 112%;
+    height: 178px;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        linear-gradient(to top, rgba(24, 88, 45, 0.92) 0%, rgba(32, 112, 56, 0.84) 36%, rgba(48, 138, 72, 0.62) 68%, rgba(48, 138, 72, 0) 100%),
+        radial-gradient(18% 56% at 6% 74%, rgba(54, 148, 79, 0.88) 0%, rgba(54, 148, 79, 0.1) 72%, rgba(54, 148, 79, 0) 100%),
+        radial-gradient(20% 62% at 20% 68%, rgba(58, 156, 85, 0.9) 0%, rgba(58, 156, 85, 0.1) 72%, rgba(58, 156, 85, 0) 100%),
+        radial-gradient(17% 54% at 34% 76%, rgba(50, 142, 75, 0.88) 0%, rgba(50, 142, 75, 0.1) 72%, rgba(50, 142, 75, 0) 100%),
+        radial-gradient(20% 62% at 50% 70%, rgba(60, 160, 88, 0.9) 0%, rgba(60, 160, 88, 0.1) 72%, rgba(60, 160, 88, 0) 100%),
+        radial-gradient(17% 54% at 66% 76%, rgba(50, 142, 75, 0.88) 0%, rgba(50, 142, 75, 0.1) 72%, rgba(50, 142, 75, 0) 100%),
+        radial-gradient(20% 62% at 82% 69%, rgba(58, 156, 85, 0.9) 0%, rgba(58, 156, 85, 0.1) 72%, rgba(58, 156, 85, 0) 100%),
+        radial-gradient(18% 56% at 96% 74%, rgba(54, 148, 79, 0.88) 0%, rgba(54, 148, 79, 0.1) 72%, rgba(54, 148, 79, 0) 100%);
+    animation: canopySway 7.2s ease-in-out infinite;
+    filter: saturate(1.08);
+}
+
+.forest-ribbon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(11% 16% at 5% 74%, rgba(80, 170, 96, 0.92), rgba(80, 170, 96, 0) 68%),
+        radial-gradient(12% 18% at 13% 66%, rgba(72, 160, 90, 0.9), rgba(72, 160, 90, 0) 68%),
+        radial-gradient(10% 15% at 22% 73%, rgba(84, 176, 100, 0.92), rgba(84, 176, 100, 0) 68%),
+        radial-gradient(12% 18% at 31% 65%, rgba(72, 160, 90, 0.9), rgba(72, 160, 90, 0) 68%),
+        radial-gradient(10% 15% at 40% 74%, rgba(82, 172, 98, 0.92), rgba(82, 172, 98, 0) 68%),
+        radial-gradient(12% 18% at 50% 66%, rgba(72, 160, 90, 0.9), rgba(72, 160, 90, 0) 68%),
+        radial-gradient(10% 15% at 60% 74%, rgba(84, 176, 100, 0.92), rgba(84, 176, 100, 0) 68%),
+        radial-gradient(12% 18% at 70% 65%, rgba(72, 160, 90, 0.9), rgba(72, 160, 90, 0) 68%),
+        radial-gradient(10% 15% at 79% 73%, rgba(82, 172, 98, 0.92), rgba(82, 172, 98, 0) 68%),
+        radial-gradient(12% 18% at 88% 66%, rgba(72, 160, 90, 0.9), rgba(72, 160, 90, 0) 68%),
+        radial-gradient(11% 16% at 96% 74%, rgba(80, 170, 96, 0.92), rgba(80, 170, 96, 0) 68%);
+    animation: canopySwaySoft 6.6s ease-in-out infinite;
+}
+
+.forest-ribbon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to top, rgba(32, 68, 34, 0.8) 0 22%, rgba(32, 68, 34, 0.28) 34%, rgba(32, 68, 34, 0) 48%),
+        radial-gradient(9% 15% at 7% 62%, rgba(46, 114, 60, 0.92), rgba(46, 114, 60, 0) 72%),
+        radial-gradient(10% 17% at 16% 56%, rgba(44, 108, 58, 0.94), rgba(44, 108, 58, 0) 73%),
+        radial-gradient(9% 15% at 24% 61%, rgba(47, 116, 62, 0.92), rgba(47, 116, 62, 0) 72%),
+        radial-gradient(11% 18% at 34% 55%, rgba(42, 104, 55, 0.95), rgba(42, 104, 55, 0) 74%),
+        radial-gradient(9% 15% at 43% 60%, rgba(47, 116, 62, 0.92), rgba(47, 116, 62, 0) 72%),
+        radial-gradient(10% 17% at 53% 56%, rgba(44, 108, 58, 0.94), rgba(44, 108, 58, 0) 73%),
+        radial-gradient(9% 15% at 62% 61%, rgba(47, 116, 62, 0.92), rgba(47, 116, 62, 0) 72%),
+        radial-gradient(11% 18% at 72% 55%, rgba(42, 104, 55, 0.95), rgba(42, 104, 55, 0) 74%),
+        radial-gradient(9% 15% at 81% 60%, rgba(47, 116, 62, 0.92), rgba(47, 116, 62, 0) 72%),
+        radial-gradient(10% 17% at 90% 56%, rgba(44, 108, 58, 0.94), rgba(44, 108, 58, 0) 73%),
+        linear-gradient(to top, rgba(56, 42, 30, 0.52) 0 30%, rgba(56, 42, 30, 0) 32%) 7% 100% / 8px 62px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.55) 0 32%, rgba(56, 42, 30, 0) 34%) 16% 100% / 9px 70px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.5) 0 30%, rgba(56, 42, 30, 0) 32%) 24% 100% / 8px 60px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.56) 0 33%, rgba(56, 42, 30, 0) 35%) 34% 100% / 10px 74px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.5) 0 31%, rgba(56, 42, 30, 0) 33%) 43% 100% / 8px 62px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.55) 0 32%, rgba(56, 42, 30, 0) 34%) 53% 100% / 9px 70px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.5) 0 30%, rgba(56, 42, 30, 0) 32%) 62% 100% / 8px 60px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.56) 0 33%, rgba(56, 42, 30, 0) 35%) 72% 100% / 10px 74px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.5) 0 31%, rgba(56, 42, 30, 0) 33%) 81% 100% / 8px 62px no-repeat,
+        linear-gradient(to top, rgba(56, 42, 30, 0.55) 0 32%, rgba(56, 42, 30, 0) 34%) 90% 100% / 9px 70px no-repeat;
+    opacity: 0.8;
+    animation: trunkSway 8.5s ease-in-out infinite;
+}
+
+@keyframes canopySway {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    50% {
+        transform: translateX(-0.6%) rotate(-0.35deg);
+    }
+    100% {
+        transform: translateX(0.5%) rotate(0.3deg);
+    }
+}
+
+@keyframes canopySwaySoft {
+    0% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateX(0.45%) rotate(0.25deg);
+        opacity: 0.96;
+    }
+    100% {
+        transform: translateX(-0.35%) rotate(-0.2deg);
+        opacity: 0.9;
+    }
+}
+
+@keyframes trunkSway {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-0.25%);
+    }
+    100% {
+        transform: translateX(0.2%);
+    }
+}
 </style>
 <head>
 	<meta charset="UTF-8">
@@ -110,5 +219,6 @@ body > * {
 <img src="https://bookroo.com/_next/image?url=https:%2F%2Fimages.bookroo.com%2Fbooks%2Feditions%2F9781665966207.jpg%3Fv%3D2&w=384&q=75" alt="Skandar Book 4 Cover" width="300">
 
 <p></p>
+<div class="forest-ribbon" aria-hidden="true"></div>
 </body>
 </html>
