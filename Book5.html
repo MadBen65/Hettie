@@ -7,10 +7,40 @@
     body {
         font-family: Arial, sans-serif;
         margin: 20px;
-        background-color: rgba(130, 90, 160, 0.95);
+        background:
+            radial-gradient(circle at 50% 14%, rgba(212, 226, 255, 0.24) 0%, rgba(212, 226, 255, 0) 38%),
+            radial-gradient(circle at 84% 22%, rgba(201, 152, 255, 0.22) 0%, rgba(201, 152, 255, 0) 36%),
+            linear-gradient(135deg, rgba(54, 35, 84, 0.98), rgba(80, 52, 122, 0.98) 48%, rgba(36, 26, 64, 0.98) 100%);
         min-height: 100vh;
         position: relative;
         overflow: hidden;
+    }
+
+    body::before,
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    body::before {
+        opacity: 0.5;
+        background:
+            radial-gradient(440px 130px at 16% 24%, rgba(124, 146, 255, 0.22), rgba(124, 146, 255, 0)),
+            radial-gradient(420px 120px at 78% 18%, rgba(202, 140, 255, 0.26), rgba(202, 140, 255, 0)),
+            radial-gradient(500px 140px at 66% 78%, rgba(97, 114, 230, 0.2), rgba(97, 114, 230, 0));
+        animation: nebulaDrift 12s ease-in-out infinite alternate;
+    }
+
+    body::after {
+        opacity: 0.22;
+        background:
+            linear-gradient(115deg, rgba(182, 198, 255, 0) 0%, rgba(182, 198, 255, 0.62) 28%, rgba(182, 198, 255, 0) 53%),
+            linear-gradient(70deg, rgba(218, 175, 255, 0) 10%, rgba(218, 175, 255, 0.5) 38%, rgba(218, 175, 255, 0) 61%);
+        mix-blend-mode: screen;
+        animation: energySweep 9.6s linear infinite;
     }
     h1 {
         font-family: 'Cinzel Decorative', Georgia, serif;
@@ -20,11 +50,25 @@
         letter-spacing: 1.5px;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 255, 255, 0.3);
         margin-bottom: 10px;
+        animation: titleCharge 2.6s ease-in-out infinite;
     }
 p {
     font-size: 16px;
     line-height: 1.5;
     color: #f5f5f5;
+    max-width: 860px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+a {
+    color: #e8dcff;
+    text-decoration: none;
+    text-shadow: 0 0 7px rgba(230, 214, 255, 0.35);
+}
+
+a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(238, 228, 255, 0.7);
 }
 
 .starfield {
@@ -60,6 +104,7 @@ img {
     display: inline-block;
     margin-top: 20px;
     isolation: isolate;
+    animation: portalHover 3.8s ease-in-out infinite;
 }
 
 .portal-frame::before {
@@ -116,6 +161,24 @@ img {
     animation: portalSpinReverse 3.2s linear infinite;
 }
 
+.war-sparks {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.42;
+    background:
+        radial-gradient(2px 2px at 8% 22%, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0)),
+        radial-gradient(2px 2px at 21% 62%, rgba(218, 189, 255, 0.82), rgba(218, 189, 255, 0)),
+        radial-gradient(2px 2px at 34% 30%, rgba(188, 210, 255, 0.8), rgba(188, 210, 255, 0)),
+        radial-gradient(2px 2px at 49% 70%, rgba(238, 204, 255, 0.86), rgba(238, 204, 255, 0)),
+        radial-gradient(2px 2px at 66% 35%, rgba(192, 223, 255, 0.82), rgba(192, 223, 255, 0)),
+        radial-gradient(2px 2px at 80% 64%, rgba(229, 194, 255, 0.86), rgba(229, 194, 255, 0)),
+        radial-gradient(2px 2px at 93% 28%, rgba(198, 215, 255, 0.82), rgba(198, 215, 255, 0));
+    mix-blend-mode: screen;
+    animation: sparkDrift 6.4s ease-in-out infinite;
+}
+
 @keyframes imageGlowPulse {
     0% {
         box-shadow: 0 0 14px rgba(61, 59, 59, 0.58), 0 0 30px rgba(255, 255, 255, 0.48), 0 0 52px rgba(186, 188, 208, 0.35);
@@ -155,7 +218,62 @@ img {
     }
 }
 
-body > *:not(.starfield) {
+@keyframes nebulaDrift {
+    0% {
+        transform: translateX(-1.2%) translateY(0);
+    }
+    100% {
+        transform: translateX(1.4%) translateY(-1%);
+    }
+}
+
+@keyframes energySweep {
+    0% {
+        transform: translateX(-22%);
+    }
+    100% {
+        transform: translateX(24%);
+    }
+}
+
+@keyframes titleCharge {
+    0%,
+    100% {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 255, 255, 0.3);
+        transform: translateY(0);
+    }
+    50% {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 30px rgba(241, 231, 255, 0.8), 0 0 54px rgba(174, 153, 255, 0.52);
+        transform: translateY(-1px);
+    }
+}
+
+@keyframes portalHover {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes sparkDrift {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-8px) translateX(1%);
+        opacity: 0.52;
+    }
+    100% {
+        transform: translateY(0) translateX(-1%);
+        opacity: 0.34;
+    }
+}
+
+body > *:not(.starfield):not(.war-sparks) {
     position: relative;
     z-index: 2;
 }
@@ -183,6 +301,7 @@ body > *:not(.starfield) {
     <img src="https://tse4.mm.bing.net/th/id/OIP.uQzWbSGjVEWut4jVVbOvIwHaLO?r=0&cb=thfvnextfalcon&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Skandar Book 5 Cover" width="300">
 </div>
 
+<div class="war-sparks" aria-hidden="true"></div>
 <div class="starfield" id="starfield" aria-hidden="true"></div>
 
 <script>

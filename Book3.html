@@ -7,11 +7,29 @@
     body {
         font-family: Arial, sans-serif;
         margin: 20px;
-        background-color: rgba(199, 204, 47, 0.995);
+        background:
+            radial-gradient(circle at 52% 16%, rgba(230, 242, 255, 0.24) 0%, rgba(230, 242, 255, 0) 40%),
+            radial-gradient(circle at 84% 18%, rgba(196, 220, 255, 0.18) 0%, rgba(196, 220, 255, 0) 34%),
+            linear-gradient(135deg, rgba(135, 146, 52, 0.98), rgba(158, 168, 64, 0.98) 45%, rgba(118, 130, 46, 0.98) 100%);
         min-height: 100vh;
         position: relative;
         overflow-x: hidden;
     }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.22;
+        mix-blend-mode: screen;
+        background:
+            linear-gradient(110deg, rgba(235, 248, 255, 0) 8%, rgba(235, 248, 255, 0.62) 34%, rgba(235, 248, 255, 0) 58%),
+            linear-gradient(72deg, rgba(198, 222, 255, 0) 16%, rgba(198, 222, 255, 0.52) 40%, rgba(198, 222, 255, 0) 62%);
+        animation: stormSweep 9.4s linear infinite;
+    }
+
     h1 {
         font-family: 'Cinzel Decorative', Georgia, serif;
         color: #ffffff;
@@ -20,13 +38,66 @@
         letter-spacing: 1.5px;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 255, 255, 0.3);
         margin-bottom: 10px;
+        animation: titleStormPulse 2.7s ease-in-out infinite;
     }
 p {
     font-size: 16px;
     line-height: 1.5;
+    color: #f6fbff;
+    max-width: 860px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+a {
+    color: #e9f4ff;
+    text-decoration: none;
+    text-shadow: 0 0 8px rgba(225, 241, 255, 0.3);
+}
+
+a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(236, 247, 255, 0.62);
 }
 img {
+    display: block;
+    margin-top: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 14px rgba(230, 244, 255, 0.56), 0 0 30px rgba(171, 212, 255, 0.5), 0 0 52px rgba(116, 177, 240, 0.38);
+    animation: coverFloat 4s ease-in-out infinite;
+}
+
+.cover-stage {
+    position: relative;
+    display: inline-block;
     margin-top: 20px;
+}
+
+.cover-stage::before,
+.cover-stage::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border-radius: 12px;
+}
+
+.cover-stage::before {
+    inset: -15px;
+    background:
+        repeating-conic-gradient(from 0deg,
+            rgba(245, 255, 155, 0.58) 0deg 4deg,
+            rgba(218, 219, 141, 0) 4deg 11deg,
+            rgba(235, 223, 56, 0.54) 11deg 15deg,
+            rgba(150, 204, 255, 0) 15deg 24deg);
+    filter: blur(1.6px);
+    opacity: 0.82;
+    animation: ringSpin 6.2s linear infinite;
+}
+
+.cover-stage::after {
+    inset: -24px;
+    background: radial-gradient(ellipse at center, rgba(214, 237, 255, 0) 55%, rgba(214, 237, 255, 0.56) 70%, rgba(214, 237, 255, 0) 84%);
+    opacity: 0.72;
+    animation: ringPulse 2.9s ease-in-out infinite;
 }
 
 .lightning-layer {
@@ -56,6 +127,38 @@ img {
     filter: blur(0.7px);
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 45%, rgba(0, 0, 0, 0) 100%);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 45%, rgba(0, 0, 0, 0) 100%);
+}
+
+.cloud-a {
+    animation: cloudDriftA 14s linear infinite;
+}
+
+.cloud-b {
+    top: -46px;
+    animation: cloudDriftB 18s linear infinite;
+}
+
+.cloud-c {
+    top: -36px;
+    animation: cloudDriftC 22s linear infinite;
+}
+
+.storm-sparks {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.36;
+    background:
+        radial-gradient(2px 2px at 9% 24%, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0)),
+        radial-gradient(2px 2px at 22% 60%, rgba(223, 238, 255, 0.84), rgba(223, 238, 255, 0)),
+        radial-gradient(2px 2px at 36% 32%, rgba(209, 231, 255, 0.8), rgba(209, 231, 255, 0)),
+        radial-gradient(2px 2px at 52% 70%, rgba(228, 243, 255, 0.86), rgba(228, 243, 255, 0)),
+        radial-gradient(2px 2px at 68% 36%, rgba(214, 236, 255, 0.82), rgba(214, 236, 255, 0)),
+        radial-gradient(2px 2px at 81% 62%, rgba(226, 244, 255, 0.86), rgba(226, 244, 255, 0)),
+        radial-gradient(2px 2px at 94% 26%, rgba(209, 232, 255, 0.8), rgba(209, 232, 255, 0));
+    mix-blend-mode: screen;
+    animation: sparkDrift 6.6s ease-in-out infinite;
 }
 
 .lightning-flash {
@@ -282,7 +385,74 @@ img {
     }
 }
 
-body > *:not(.lightning-layer) {
+@keyframes stormSweep {
+    0% {
+        transform: translateX(-24%);
+    }
+    100% {
+        transform: translateX(24%);
+    }
+}
+
+@keyframes titleStormPulse {
+    0%,
+    100% {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 255, 255, 0.3);
+        transform: translateY(0);
+    }
+    50% {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 28px rgba(233, 246, 255, 0.78), 0 0 48px rgba(157, 209, 255, 0.52);
+        transform: translateY(-1px);
+    }
+}
+
+@keyframes ringSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ringPulse {
+    0%,
+    100% {
+        opacity: 0.46;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity: 0.84;
+        transform: scale(1.03);
+    }
+}
+
+@keyframes coverFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes sparkDrift {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.28;
+    }
+    50% {
+        transform: translateY(-8px) translateX(1%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0) translateX(-1%);
+        opacity: 0.32;
+    }
+}
+
+body > *:not(.lightning-layer):not(.storm-sparks) {
     position: relative;
     z-index: 2;
 }
@@ -306,9 +476,12 @@ body > *:not(.lightning-layer) {
 
 <h1>SKANDAR & THE CHAOS TRIALS</h1>
 <p>Skandar is a book about a boy named Skandar who embarks on an epic adventure with bloodthirsty unicorns. He has to face the chaos trials and Scoundrel's Luck rebelling and with his sister Kenna not trusting him it's become a lot worse. He faces this journey with his quartet: Bobby Bruna, Mitchell Henderson, and Florence Shekoni.</p>
-<img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1713284397i/137847194.jpg" alt="Skandar Book 3 Cover" width="300">
+<div class="cover-stage">
+    <img src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1713284397i/137847194.jpg" alt="Skandar Book 3 Cover" width="300">
+</div>
 
 <p></p>
+<div class="storm-sparks" aria-hidden="true"></div>
 <div class="lightning-layer lightning-flash" aria-hidden="true"></div>
 <div class="lightning-layer bolt bolt-a" aria-hidden="true"></div>
 <div class="lightning-layer bolt bolt-b" aria-hidden="true"></div>

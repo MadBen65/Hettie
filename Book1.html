@@ -5,14 +5,32 @@
     @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
     body {
-        font-family: ' Georgia, serif;
+        font-family: Arial, sans-serif;
         margin: 20px;
-        background-color: rgba(166, 76, 37, 0.995);
+        background:
+            radial-gradient(circle at 50% 16%, rgba(255, 218, 150, 0.28) 0%, rgba(255, 218, 150, 0) 42%),
+            radial-gradient(circle at 82% 20%, rgba(255, 146, 92, 0.22) 0%, rgba(255, 146, 92, 0) 36%),
+            linear-gradient(to bottom, rgba(186, 84, 39, 0.99), rgba(145, 55, 29, 0.995) 46%, rgba(89, 27, 19, 0.995) 100%);
         min-height: 100vh;
         position: relative;
         padding-bottom: 120px;
         overflow-x: hidden;
     }
+
+    body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.26;
+        mix-blend-mode: screen;
+        background:
+            linear-gradient(112deg, rgba(255, 225, 170, 0) 8%, rgba(255, 225, 170, 0.62) 34%, rgba(255, 225, 170, 0) 58%),
+            linear-gradient(72deg, rgba(255, 166, 120, 0) 16%, rgba(255, 166, 120, 0.48) 40%, rgba(255, 166, 120, 0) 62%);
+        animation: heatHaze 9.2s linear infinite;
+    }
+
     h1 {
         font-family: 'Cinzel Decorative', Georgia, serif;
         color: #df9f56;
@@ -21,13 +39,84 @@
         letter-spacing: 1.5px;
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 255, 255, 0.3);
         margin-bottom: 10px;
+        animation: titleInferno 2.6s ease-in-out infinite;
     }
 p {
     font-size: 16px;
     line-height: 1.5;
+    color: #fff2e6;
+    max-width: 860px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+a {
+    color: #ffe1bf;
+    text-decoration: none;
+    text-shadow: 0 0 8px rgba(255, 214, 164, 0.34);
+}
+
+a:hover {
+    color: #fff7ef;
+    text-shadow: 0 0 12px rgba(255, 231, 196, 0.68);
 }
 img {
+    display: block;
+    margin-top: 0;
+    border-radius: 10px;
+    box-shadow: 0 0 14px rgba(255, 225, 180, 0.62), 0 0 30px rgba(255, 167, 103, 0.52), 0 0 52px rgba(235, 122, 64, 0.42);
+    animation: coverFloat 4s ease-in-out infinite;
+}
+
+.cover-stage {
+    position: relative;
+    display: inline-block;
     margin-top: 20px;
+}
+
+.cover-stage::before,
+.cover-stage::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    border-radius: 12px;
+}
+
+.cover-stage::before {
+    inset: -15px;
+    background:
+        repeating-conic-gradient(from 0deg,
+            rgba(255, 214, 164, 0.64) 0deg 4deg,
+            rgba(255, 214, 164, 0) 4deg 11deg,
+            rgba(255, 143, 75, 0.58) 11deg 15deg,
+            rgba(255, 143, 75, 0) 15deg 24deg);
+    filter: blur(1.5px);
+    opacity: 0.82;
+    animation: ringSpin 6.2s linear infinite;
+}
+
+.cover-stage::after {
+    inset: -24px;
+    background: radial-gradient(ellipse at center, rgba(255, 218, 164, 0) 55%, rgba(255, 218, 164, 0.58) 70%, rgba(255, 218, 164, 0) 84%);
+    opacity: 0.74;
+    animation: ringPulse 2.9s ease-in-out infinite;
+}
+
+.ember-field {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.38;
+    background:
+        radial-gradient(2px 2px at 8% 24%, rgba(255, 248, 226, 0.88), rgba(255, 248, 226, 0)),
+        radial-gradient(2px 2px at 21% 60%, rgba(255, 201, 146, 0.86), rgba(255, 201, 146, 0)),
+        radial-gradient(2px 2px at 36% 34%, rgba(255, 223, 173, 0.84), rgba(255, 223, 173, 0)),
+        radial-gradient(2px 2px at 52% 70%, rgba(255, 176, 116, 0.86), rgba(255, 176, 116, 0)),
+        radial-gradient(2px 2px at 68% 38%, rgba(255, 217, 166, 0.84), rgba(255, 217, 166, 0)),
+        radial-gradient(2px 2px at 82% 62%, rgba(255, 190, 130, 0.88), rgba(255, 190, 130, 0)),
+        radial-gradient(2px 2px at 94% 26%, rgba(255, 228, 186, 0.82), rgba(255, 228, 186, 0));
+    mix-blend-mode: screen;
+    animation: emberShift 6.6s ease-in-out infinite;
 }
 
 .fire-strip {
@@ -216,6 +305,73 @@ img {
     }
 }
 
+@keyframes heatHaze {
+    0% {
+        transform: translateX(-24%);
+    }
+    100% {
+        transform: translateX(24%);
+    }
+}
+
+@keyframes titleInferno {
+    0%,
+    100% {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 18px rgba(255, 255, 255, 0.3);
+        transform: translateY(0);
+    }
+    50% {
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 0 28px rgba(255, 226, 192, 0.84), 0 0 48px rgba(255, 149, 86, 0.52);
+        transform: translateY(-1px);
+    }
+}
+
+@keyframes ringSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes ringPulse {
+    0%,
+    100% {
+        opacity: 0.46;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity: 0.86;
+        transform: scale(1.03);
+    }
+}
+
+@keyframes coverFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes emberShift {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-9px) translateX(1%);
+        opacity: 0.52;
+    }
+    100% {
+        transform: translateY(0) translateX(-1%);
+        opacity: 0.34;
+    }
+}
+
 .fire-strip::after {
     background: 
         linear-gradient(to top, rgba(255, 225, 120, 0.85) 8%, rgba(255, 175, 50, 0.7) 40%, rgba(255, 140, 20, 0) 78%),
@@ -257,11 +413,17 @@ img {
     clip-path: polygon(0% 100%, 4% 88%, 10% 92%, 16% 78%, 22% 90%, 28% 77%, 34% 90%, 40% 75%, 46% 88%, 52% 76%, 58% 89%, 64% 74%, 70% 88%, 76% 78%, 82% 90%, 88% 80%, 94% 92%, 100% 86%, 100% 100%);
     filter: blur(0.3px);
     opacity: 1;
-    animation: 
+    animation:
         sparkRise 1.2s infinite ease-out,
         sparkRise2 1.4s infinite ease-out 0.1s,
         sparkRise3 1.3s infinite ease-out 0.2s;
-}</style>
+}
+
+body > *:not(.fire-strip):not(.fire-plumes):not(.ember-field) {
+    position: relative;
+    z-index: 2;
+}
+</style>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -281,9 +443,12 @@ img {
 
 <h1>SKANDAR & THE UNICORN THIEF</h1>
 <p>Skandar is a book about a boy named Skandar who embarks on an epic adventure with bloodthirsty unicorns. He discovers that he is allied to an illegal element. He faces this journey with his quartet: Bobby Bruna, Mitchell Henderson, and Florence Shekoni, along with his unicorn, Scoundrel's Luck.</p>
-<img src="XL.jpg" alt="Skandar Book 1 Cover" width="300">
+<div class="cover-stage">
+    <img src="XL.jpg" alt="Skandar Book 1 Cover" width="300">
+</div>
 
 <p></p>
+<div class="ember-field" aria-hidden="true"></div>
 <div class="fire-strip" aria-hidden="true"></div>
 <div class="fire-plumes" aria-hidden="true"></div>
 </body>
