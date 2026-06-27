@@ -741,7 +741,7 @@ a:hover {
     }
 }
 
-body > *:not(.edge-runner) {
+body > *:not(.edge-runner):not(.heart-rail) {
     position: relative;
     z-index: 2;
 }
@@ -762,7 +762,7 @@ body > *:not(.edge-runner) {
     --x: 44px;
     --dur: 8.5s;
     --delay: 0s;
-    --color: #cfb4ff;
+    --color: #ff0000;
     position: absolute;
     left: var(--x);
     bottom: -30px;
@@ -773,8 +773,10 @@ body > *:not(.edge-runner) {
     border-radius: 3px;
     opacity: 0;
     box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.28),
-        0 4px 10px rgba(57, 45, 108, 0.42);
+        0 0 0 1.5px rgba(255, 255, 255, 0.45),
+        0 0 8px rgba(255, 0, 0, 0.8),
+        0 0 16px rgba(255, 100, 100, 0.6),
+        0 4px 12px rgba(0, 0, 0, 0.3);
     animation: heartsRise var(--dur) linear infinite;
     animation-delay: var(--delay);
 }
@@ -799,16 +801,17 @@ body > *:not(.edge-runner) {
     top: 0;
 }
 
-.heart-rail .heart:nth-child(1) { --x: 22px; --size: 14px; --dur: 9.3s; --delay: 0s; --color: #c45e5e; }
-.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #e4ec7c; }
-.heart-rail .heart:nth-child(3) { --x: 36px; --size: 12px; --dur: 7.6s; --delay: 2.5s; --color: #dfd1ff; }
-.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #428a57; }
-.heart-rail .heart:nth-child(5) { --x: 48px; --size: 20px; --dur: 10s; --delay: 4.8s; --color: #4e67b9; }
-.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #ab9bc2; }
-.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #b396ff; }
-.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #ffffff; }
+.heart-rail .heart:nth-child(1) { --x: 22px; --size: 14px; --dur: 9.3s; --delay: 0s; --color: #ff0000; filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.8)); }
+.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #ff7700; filter: drop-shadow(0 0 6px rgba(255, 119, 0, 0.8)); }
+.heart-rail .heart:nth-child(3) { --x: 36px; --size: 12px; --dur: 7.6s; --delay: 2.5s; --color: #ffff00; filter: drop-shadow(0 0 6px rgba(255, 255, 0, 0.8)); }
+.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #00ff00; filter: drop-shadow(0 0 6px rgba(0, 255, 0, 0.8)); }
+.heart-rail .heart:nth-child(5) { --x: 48px; --size: 20px; --dur: 10s; --delay: 4.8s; --color: #00ffff; filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.8)); }
+.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #0066ff; filter: drop-shadow(0 0 6px rgba(0, 102, 255, 0.8)); }
+.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #6633ff; filter: drop-shadow(0 0 6px rgba(102, 51, 255, 0.8)); }
+.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #cc00ff; filter: drop-shadow(0 0 6px rgba(204, 0, 255, 0.8)); }
+.heart-rail .heart:nth-child(9) { --x: 74px; --size: 14px; --dur: 8.9s; --delay: 8.3s; --color: #ff0080; filter: drop-shadow(0 0 6px rgba(255, 0, 128, 0.8)); }
 .heart-rail .heart:nth-child(9) { --x: 74px; --size: 14px; --dur: 8.9s; --delay: 8.3s; --color: #000000; }
-
+    0% {
 @keyframes heartsRise {
     0% {
         transform: translateY(0) translateX(0) rotate(-45deg) scale(0.84);
