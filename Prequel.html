@@ -745,6 +745,86 @@ body > *:not(.edge-runner) {
     position: relative;
     z-index: 2;
 }
+
+.heart-rail {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    width: 92px;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 40;
+}
+
+.heart {
+    --size: 16px;
+    --x: 44px;
+    --dur: 8.5s;
+    --delay: 0s;
+    --color: #cfb4ff;
+    position: absolute;
+    left: var(--x);
+    bottom: -30px;
+    width: var(--size);
+    height: var(--size);
+    background: var(--color);
+    transform: rotate(-45deg);
+    border-radius: 3px;
+    opacity: 0;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.28),
+        0 4px 10px rgba(57, 45, 108, 0.42);
+    animation: heartsRise var(--dur) linear infinite;
+    animation-delay: var(--delay);
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background: var(--color);
+    border-radius: 50%;
+}
+
+.heart::before {
+    left: 0;
+    top: calc(var(--size) * -0.5);
+}
+
+.heart::after {
+    left: calc(var(--size) * 0.5);
+    top: 0;
+}
+
+.heart-rail .heart:nth-child(1) { --x: 22px; --size: 14px; --dur: 9.3s; --delay: 0s; --color: #c45e5efa; }
+.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #e5ec7cfb; }
+.heart-rail .heart:nth-child(3) { --x: 36px; --size: 12px; --dur: 7.6s; --delay: 2.5s; --color: #dfd1ff; }
+.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #428a57; }
+.heart-rail .heart:nth-child(5) { --x: 48px; --size: 20px; --dur: 10s; --delay: 4.8s; --color: #4e67b9; }
+.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #ab9bc2; }
+.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #b396ff; }
+.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #ffffff; }
+.heart-rail .heart:nth-child(9) { --x: 74px; --size: 14px; --dur: 8.9s; --delay: 8.3s; --color: #000000; }
+
+@keyframes heartsRise {
+    0% {
+        transform: translateY(0) translateX(0) rotate(-45deg) scale(0.84);
+        opacity: 0;
+    }
+    12% {
+        opacity: 0.95;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(-8px) rotate(-45deg) scale(1);
+    }
+    100% {
+        transform: translateY(-112vh) translateX(6px) rotate(-45deg) scale(1.08);
+        opacity: 0;
+    }
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -767,6 +847,18 @@ body > *:not(.edge-runner) {
 <p>This prequel to the Skandar series explores the story of George Penhaligon the first person to ever stumble upon the island and bond to a unicorn. His bonded unicorn's name is Rebel Spirit he also meets Rose  and her silver unicorn  Silver Shanty.</p>
 <div class="cover-stage">
     <img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781398540552/untitled-novella-9781398540552_hr.jpg" alt="Skandar Prequel Cover" width="300">
+</div>
+
+<div class="heart-rail" aria-hidden="true">
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
 </div>
 
 <div class="chaos-layer" id="chaos-layer" aria-hidden="true"></div>

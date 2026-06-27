@@ -277,6 +277,86 @@ body > *:not(.starfield):not(.war-sparks) {
     position: relative;
     z-index: 2;
 }
+
+.heart-rail {
+    position: fixed;
+    top: 0;
+    right: 20px;
+    width: 92px;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 40;
+}
+
+.heart {
+    --size: 16px;
+    --x: 44px;
+    --dur: 8.5s;
+    --delay: 0s;
+    --color: #d8b5ff;
+    position: absolute;
+    left: var(--x);
+    bottom: -30px;
+    width: var(--size);
+    height: var(--size);
+    background: var(--color);
+    transform: rotate(-45deg);
+    border-radius: 3px;
+    opacity: 0;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.28),
+        0 4px 10px rgba(70, 42, 120, 0.4);
+    animation: heartsRise var(--dur) linear infinite;
+    animation-delay: var(--delay);
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background: var(--color);
+    border-radius: 50%;
+}
+
+.heart::before {
+    left: 0;
+    top: calc(var(--size) * -0.5);
+}
+
+.heart::after {
+    left: calc(var(--size) * 0.5);
+    top: 0;
+}
+
+.heart-rail .heart:nth-child(1) { --x: 22px; --size: 14px; --dur: 9.3s; --delay: 0s; --color: #7f6392; }
+.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #b194d3; }
+.heart-rail .heart:nth-child(3) { --x: 36px; --size: 12px; --dur: 7.6s; --delay: 2.5s; --color: #524674; }
+.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #d29bff; }
+.heart-rail .heart:nth-child(5) { --x: 48px; --size: 20px; --dur: 10s; --delay: 4.8s; --color: #b49bca; }
+.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #9656a3; }
+.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #bf92ff; }
+.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #f6e5ff; }
+.heart-rail .heart:nth-child(9) { --x: 74px; --size: 14px; --dur: 8.9s; --delay: 8.3s; --color: #cda3ff; }
+
+@keyframes heartsRise {
+    0% {
+        transform: translateY(0) translateX(0) rotate(-45deg) scale(0.84);
+        opacity: 0;
+    }
+    12% {
+        opacity: 0.95;
+    }
+    50% {
+        transform: translateY(-50vh) translateX(-8px) rotate(-45deg) scale(1);
+    }
+    100% {
+        transform: translateY(-112vh) translateX(6px) rotate(-45deg) scale(1.08);
+        opacity: 0;
+    }
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -299,6 +379,18 @@ body > *:not(.starfield):not(.war-sparks) {
 <p>Skandar is about a boy named Skandar Smith who embarks on an epic journey with blood thirsty unicorns, in this final book Skandar faces an epic war against the silvers and the non-spying sentinels he faces this war with almost 90% of the island's population.</p>
 <div class="portal-frame">
     <img src="https://tse4.mm.bing.net/th/id/OIP.uQzWbSGjVEWut4jVVbOvIwHaLO?r=0&cb=thfvnextfalcon&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Skandar Book 5 Cover" width="300">
+</div>
+
+<div class="heart-rail" aria-hidden="true">
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
+    <span class="heart"></span>
 </div>
 
 <div class="war-sparks" aria-hidden="true"></div>

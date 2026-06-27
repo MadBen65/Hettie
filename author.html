@@ -139,14 +139,14 @@
 	}
 	table tr:nth-child(5) td:nth-child(3) {
 		background:
-			radial-gradient(ellipse 16px 10px at 12% -10%, rgba(255, 188, 223, 0.95) 0 85%, transparent 86%),
-			radial-gradient(ellipse 15px 9px at 24% -24%, rgba(255, 168, 214, 0.92) 0 85%, transparent 86%),
-			radial-gradient(ellipse 14px 10px at 38% -6%, rgba(255, 203, 233, 0.94) 0 85%, transparent 86%),
-			radial-gradient(ellipse 15px 10px at 50% -18%, rgba(255, 155, 206, 0.9) 0 85%, transparent 86%),
-			radial-gradient(ellipse 14px 9px at 62% -28%, rgba(255, 215, 239, 0.9) 0 85%, transparent 86%),
+			radial-gradient(ellipse 16px 10px at 12% -10%, rgba(248, 137, 137, 0.95) 0 85%, transparent 86%),
+			radial-gradient(ellipse 15px 9px at 24% -24%, rgba(165, 96, 96, 0.92) 0 85%, transparent 86%),
+			radial-gradient(ellipse 14px 10px at 38% -6%, rgba(255, 203, 203, 0.94) 0 85%, transparent 86%),
+			radial-gradient(ellipse 15px 10px at 50% -18%, rgba(255, 155, 155, 0.9) 0 85%, transparent 86%),
+			radial-gradient(ellipse 14px 9px at 62% -28%, rgba(255, 215, 215, 0.9) 0 85%, transparent 86%),
 			radial-gradient(ellipse 16px 10px at 74% -8%, rgba(255, 182, 221, 0.92) 0 85%, transparent 86%),
-			radial-gradient(ellipse 15px 9px at 86% -22%, rgba(255, 204, 232, 0.93) 0 85%, transparent 86%),
-			radial-gradient(ellipse 14px 10px at 96% -12%, rgba(255, 170, 214, 0.9) 0 85%, transparent 86%),
+			radial-gradient(ellipse 15px 9px at 86% -22%, rgba(255, 204, 204, 0.93) 0 85%, transparent 86%),
+			radial-gradient(ellipse 14px 10px at 96% -12%, rgba(255, 0, 0, 0.9) 0 85%, transparent 86%),
 			linear-gradient(135deg, rgba(255, 188, 226, 0.3), rgba(255, 245, 250, 0.18));
 		background-size: 92px 150px, 96px 160px, 90px 145px, 100px 170px, 94px 155px, 98px 165px, 88px 150px, 102px 175px, 100% 100%;
 		background-repeat: repeat;
@@ -249,6 +249,86 @@
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 	}
+
+	.heart-rail {
+		position: fixed;
+		top: 0;
+		right: 20px;
+		width: 92px;
+		height: 100vh;
+		pointer-events: none;
+		overflow: hidden;
+		z-index: 40;
+	}
+
+	.heart {
+		--size: 16px;
+		--x: 44px;
+		--dur: 8.5s;
+		--delay: 0s;
+		--color: #c41212;
+		position: absolute;
+		left: var(--x);
+		bottom: -30px;
+		width: var(--size);
+		height: var(--size);
+		background: var(--color);
+		transform: rotate(-45deg);
+		border-radius: 3px;
+		opacity: 0;
+		box-shadow:
+			0 0 0 1px rgba(255, 255, 255, 0.25),
+			0 4px 9px rgba(99, 15, 57, 0.35);
+		animation: heartsRise var(--dur) linear infinite;
+		animation-delay: var(--delay);
+	}
+
+	.heart::before,
+	.heart::after {
+		content: "";
+		position: absolute;
+		width: var(--size);
+		height: var(--size);
+		background: var(--color);
+		border-radius: 50%;
+	}
+
+	.heart::before {
+		left: 0;
+		top: calc(var(--size) * -0.5);
+	}
+
+	.heart::after {
+		left: calc(var(--size) * 0.5);
+		top: 0;
+	}
+
+	.heart-rail .heart:nth-child(1) { --x: 22px; --size: 14px; --dur: 9.3s; --delay: 0s; --color: #db4545; }
+	.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #ff4f4f; }
+	.heart-rail .heart:nth-child(3) { --x: 36px; --size: 12px; --dur: 7.6s; --delay: 2.5s; --color: #ff9a9a; }
+	.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #a03b3b; }
+	.heart-rail .heart:nth-child(5) { --x: 48px; --size: 20px; --dur: 10s; --delay: 4.8s; --color: #d46c43; }
+	.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #ff8985; }
+	.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #ff5a5a; }
+	.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #ffadad; }
+	.heart-rail .heart:nth-child(9) { --x: 74px; --size: 14px; --dur: 8.9s; --delay: 8.3s; --color: #ff6c67; }
+
+	@keyframes heartsRise {
+		0% {
+			transform: translateY(0) translateX(0) rotate(-45deg) scale(0.84);
+			opacity: 0;
+		}
+		12% {
+			opacity: 0.95;
+		}
+		50% {
+			transform: translateY(-50vh) translateX(-8px) rotate(-45deg) scale(1);
+		}
+		100% {
+			transform: translateY(-112vh) translateX(6px) rotate(-45deg) scale(1.08);
+			opacity: 0;
+		}
+	}
 	body > * {
 		position: relative;
 		z-index: 1;
@@ -260,6 +340,18 @@
 	<title>Author</title>
 </head>
 <body>
+
+<div class="heart-rail" aria-hidden="true">
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+	<span class="heart"></span>
+</div>
 
 <p>
 	<a href="index.html">Menu</a> |
