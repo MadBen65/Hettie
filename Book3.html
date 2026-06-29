@@ -452,21 +452,10 @@ img {
     }
 }
 
-body > *:not(.lightning-layer):not(.storm-sparks) {
-    position: relative;
-    z-index: 2;
-}
-</style>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Skandar Book 3</title>
-
 .heart-rail {
 	position: fixed;
 	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
+    right: 16px;
 	width: 92px;
 	height: 100vh;
 	pointer-events: none;
@@ -491,9 +480,9 @@ body > *:not(.lightning-layer):not(.storm-sparks) {
 	opacity: 0;
 	box-shadow:
 		0 0 0 1.5px rgba(255, 255, 255, 0.6),
-		0 0 8px rgba(0, 255, 136, 0.8),
-		0 0 16px rgba(0, 255, 136, 0.6),
-		0 4px 12px rgba(0, 100, 60, 0.4);
+		0 0 8px rgba(255, 251, 0, 0.8),
+		0 0 16px rgba(229, 255, 0, 0.6),
+		0 4px 12px rgba(82, 100, 0, 0.4);
 	animation: heartsRise var(--dur) linear infinite;
 	animation-delay: var(--delay);
 }
@@ -519,13 +508,13 @@ body > *:not(.lightning-layer):not(.storm-sparks) {
 }
 
 .heart-rail .heart:nth-child(1) { --x: 22px; --size: 14px; --dur: 9.3s; --delay: 0s; --color: #e8ff00; }
-.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #90ee90; }
+.heart-rail .heart:nth-child(2) { --x: 60px; --size: 18px; --dur: 8.1s; --delay: 1.4s; --color: #c3e476; }
 .heart-rail .heart:nth-child(3) { --x: 36px; --size: 12px; --dur: 7.6s; --delay: 2.5s; --color: #ffdd33; }
-.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #7cff00; }
+.heart-rail .heart:nth-child(4) { --x: 70px; --size: 15px; --dur: 8.7s; --delay: 3.3s; --color: #ffee00; }
 .heart-rail .heart:nth-child(5) { --x: 48px; --size: 20px; --dur: 10s; --delay: 4.8s; --color: #e8ff00; }
-.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #90ee90; }
-.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #ffdd33; }
-.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #7cff00; }
+.heart-rail .heart:nth-child(6) { --x: 28px; --size: 13px; --dur: 7.9s; --delay: 5.8s; --color: #ffffff; }
+.heart-rail .heart:nth-child(7) { --x: 64px; --size: 16px; --dur: 8.4s; --delay: 6.5s; --color: #e4dbb0; }
+.heart-rail .heart:nth-child(8) { --x: 40px; --size: 11px; --dur: 7.2s; --delay: 7.1s; --color: #d9ff00; }
 .heart-rail .heart:nth-child(9) { --x: 74px; --size: 14px; --dur: 8.9s; --delay: 8.3s; --color: #e8ff00; }
 
 @keyframes heartsRise {
@@ -545,17 +534,30 @@ body > *:not(.lightning-layer):not(.storm-sparks) {
 	}
 }
 
+body > *:not(.lightning-layer):not(.storm-sparks) {
+    position: relative;
+    z-index: 2;
+}
+</style>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Skandar Book 3</title>
+
+
+
 </head>
 <body>
 
 <p>
     <a href="index.html">Menu</a> |
-    <a href="Book1.html">Book 1</a> |
+    <a href="Book1.html"><img src="https://covers.openlibrary.org/b/id/13308739-S.jpg" alt="Book 1" style="display:inline-block;vertical-align:middle;width:32px;height:48px;margin:0 4px;border-radius:4px;animation:none;box-shadow:0 0 6px rgba(255,255,255,0.35);"></a> |
     <a href="Book2.html">Book 2</a> |
     <a href="Book3.html">Book 3</a> |
     <a href="Book4.html">Book 4</a> |
     <a href="Book5.html">Book 5</a> |
-    <a href="Prequel.html">Prequel</a>
+    <a href="Prequel.html">Prequel</a> |
+    <a href="author.html">Author Page</a>
 </p>
 
 <h1>SKANDAR & THE CHAOS TRIALS</h1>
