@@ -4,6 +4,16 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
+    html::before {
+        content: "";
+        position: fixed;
+        inset: 8px;
+        border-radius: 18px;
+        box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.34), inset 0 0 68px rgba(255, 255, 255, 0.18), 0 0 28px rgba(255, 255, 255, 0.98), 0 0 74px rgba(245, 248, 255, 0.82), 0 0 120px rgba(228, 236, 255, 0.58);
+        pointer-events: none;
+        z-index: 9999;
+    }
+
     body {
         font-family: Arial, sans-serif;
         margin: 20px;
@@ -95,8 +105,9 @@ a:hover {
 
 img {
     display: block;
+    border: 3px solid rgba(255, 231, 150, 0.88);
     border-radius: 6px;
-    box-shadow: 0 0 18px rgba(255, 255, 255, 0.7), 0 0 38px rgba(210, 220, 255, 0.65), 0 0 64px rgba(170, 180, 255, 0.45);
+    box-shadow: 0 0 0 1px rgba(255, 247, 210, 0.72), 0 0 16px rgba(255, 232, 132, 0.78), 0 0 18px rgba(255, 255, 255, 0.7), 0 0 38px rgba(210, 220, 255, 0.65), 0 0 64px rgba(170, 180, 255, 0.45);
     animation: imageGlowPulse 2.8s ease-in-out infinite;
 }
 
