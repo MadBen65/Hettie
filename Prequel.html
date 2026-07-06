@@ -1337,14 +1337,16 @@ body > *:not(.edge-runner):not(.heart-rail):not(.ember-field):not(.fire-strip):n
     width: var(--size);
     height: var(--size);
     background: var(--color);
+    color: var(--color);
     transform: rotate(-45deg);
     border-radius: 3px;
     opacity: 0;
     box-shadow:
-        0 0 0 1.5px rgba(255, 255, 255, 0.45),
-        0 0 8px rgba(255, 0, 0, 0.8),
-        0 0 16px rgba(255, 100, 100, 0.6),
+        0 0 0 1.5px rgba(255, 255, 255, 0.55),
+        0 0 12px currentColor,
+        0 0 26px currentColor,
         0 4px 12px rgba(0, 0, 0, 0.3);
+    filter: saturate(1.3) brightness(1.24);
     animation: heartsRise var(--dur) linear infinite;
     animation-delay: var(--delay);
 }
