@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Inheritance Cycle</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #f4f7ff;
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 10%, #3c4f9c 0%, #1f2d5e 40%, #111733 100%);
+            padding: 24px;
+        }
+
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .nav {
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.2);
+            font-size: 0.95rem;
+        }
+
+        .nav a {
+            color: #d9e5ff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .hero {
+            padding: 22px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+        }
+
+        p {
+            line-height: 1.55;
+            color: #e0e9ff;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .card h2 {
+            margin: 10px 0 6px;
+            font-size: 1.1rem;
+        }
+
+        .card a {
+            color: #10193c;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 8px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #ffd88c, #f3bd4b);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <nav class="nav">
+            <a href="../../index.html">Hettie's Book Reviews</a> |
+            <a href="index.html">Inheritance Cycle Menu</a> |
+            <a href="Eragon.html">Eragon</a> |
+            <a href="Eldest.html">Eldest</a> |
+            <a href="Brisingr.html">Brisingr</a> |
+            <a href="Inheritance.html">Inheritance</a> |
+            <a href="author.html">Author</a>
+        </nav>
+
+        <section class="hero">
+            <h1>The Inheritance Cycle</h1>
+            <p>
+                Christopher Paolini's core Inheritance Cycle follows Eragon and Saphira in Alagaesia
+                as they challenge Galbatorix and rebuild the Dragon Rider legacy.
+            </p>
+            <p>
+                Main books in order: Eragon (2003), Eldest (2005), Brisingr (2008), Inheritance (2011).
+            </p>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <img src="https://m.media-amazon.com/images/I/91eUSstSi2L._SL1500_.jpg" alt="Eragon cover">
+                <h2>Eragon</h2>
+                <a href="Eragon.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <img src="https://m.media-amazon.com/images/I/91kYJbNqNfL._SL1500_.jpg" alt="Eldest cover">
+                <h2>Eldest</h2>
+                <a href="Eldest.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <img src="https://m.media-amazon.com/images/I/91f6z5gM8pL._SL1500_.jpg" alt="Brisingr cover">
+                <h2>Brisingr</h2>
+                <a href="Brisingr.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <img src="https://m.media-amazon.com/images/I/91SW8qS6HcL._SL1500_.jpg" alt="Inheritance cover">
+                <h2>Inheritance</h2>
+                <a href="Inheritance.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Christopher_Paolini_by_Gage_Skidmore.jpg/640px-Christopher_Paolini_by_Gage_Skidmore.jpg" alt="Christopher Paolini">
+                <h2>Christopher Paolini</h2>
+                <a href="author.html">Open page</a>
+            </article>
+        </section>
+    </div>
+</body>
+</html>
