@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,16 +8,72 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
-        body { margin: 0; font-family: Arial, sans-serif; background: #245a48; color: #b5c27b; padding: 24px; }
+        body { margin: 0; font-family: Arial, sans-serif; background: #245a48; color: #b5c27b; padding: 24px; position: relative; overflow-x: hidden; }
         .wrap { max-width: 920px; margin: 0 auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; overflow: hidden; }
         .nav { padding: 12px 16px; background: rgba(0,0,0,0.25); }
         .nav a { color: #b5c27b; text-decoration: none; margin-right: 8px; font-family: "caVIlloni", cursive; }
         h1, h2, h3 { font-family: 'Cinzel Decorative', Georgia, serif; }
         .content { padding: 20px; }
         img { width: 280px; max-width: 100%; border-radius: 10px; border: 2px solid rgba(255,255,255,0.35); }
+        .paint-splatter {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(90px 70px at 8% 16%, rgba(84, 0, 10, 0.58), rgba(84, 0, 10, 0) 70%),
+                radial-gradient(70px 54px at 16% 20%, rgba(112, 7, 18, 0.72), rgba(112, 7, 18, 0) 72%),
+                radial-gradient(110px 78px at 84% 11%, rgba(92, 0, 14, 0.54), rgba(92, 0, 14, 0) 72%),
+                radial-gradient(62px 46px at 91% 17%, rgba(125, 10, 24, 0.68), rgba(125, 10, 24, 0) 72%),
+                radial-gradient(120px 92px at 14% 86%, rgba(102, 6, 20, 0.52), rgba(102, 6, 20, 0) 74%),
+                radial-gradient(66px 52px at 22% 81%, rgba(128, 12, 26, 0.64), rgba(128, 12, 26, 0) 70%),
+                radial-gradient(132px 102px at 88% 86%, rgba(94, 2, 15, 0.56), rgba(94, 2, 15, 0) 75%),
+                radial-gradient(76px 56px at 79% 79%, rgba(136, 16, 30, 0.66), rgba(136, 16, 30, 0) 70%),
+                linear-gradient(to bottom, rgba(88, 0, 14, 0.38) 0 30px, rgba(88, 0, 14, 0) 120px),
+                linear-gradient(to top, rgba(88, 0, 14, 0.36) 0 28px, rgba(88, 0, 14, 0) 110px);
+            filter: saturate(1.08);
+        }
+        .paint-splatter::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(104, 6, 18, 0.55), rgba(104, 6, 18, 0)) 7% 0 / 9px 190px no-repeat,
+                linear-gradient(to bottom, rgba(119, 8, 22, 0.55), rgba(119, 8, 22, 0)) 19% 0 / 7px 160px no-repeat,
+                linear-gradient(to bottom, rgba(108, 6, 20, 0.5), rgba(108, 6, 20, 0)) 86% 0 / 10px 210px no-repeat,
+                linear-gradient(to bottom, rgba(125, 9, 24, 0.5), rgba(125, 9, 24, 0)) 93% 0 / 6px 175px no-repeat,
+                linear-gradient(to top, rgba(110, 7, 20, 0.52), rgba(110, 7, 20, 0)) 12% 100% / 8px 145px no-repeat,
+                linear-gradient(to top, rgba(132, 13, 28, 0.52), rgba(132, 13, 28, 0)) 82% 100% / 10px 162px no-repeat;
+            opacity: 0.92;
+            animation: dripFlow 7.5s linear infinite;
+        }
+        .paint-splatter::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(134, 10, 25, 0.5), rgba(134, 10, 25, 0)) 6% -40px / 5px 130px no-repeat,
+                linear-gradient(to bottom, rgba(122, 8, 23, 0.48), rgba(122, 8, 23, 0)) 18% -60px / 6px 160px no-repeat,
+                linear-gradient(to bottom, rgba(146, 14, 30, 0.52), rgba(146, 14, 30, 0)) 87% -35px / 5px 140px no-repeat,
+                linear-gradient(to bottom, rgba(118, 8, 21, 0.46), rgba(118, 8, 21, 0)) 94% -50px / 4px 120px no-repeat;
+            opacity: 0.75;
+            animation: dripFlowSlow 10.5s linear infinite;
+        }
+        @keyframes dripFlow {
+            0% { transform: translateY(-10px); opacity: 0.8; }
+            70% { opacity: 0.95; }
+            100% { transform: translateY(120px); opacity: 0.85; }
+        }
+        @keyframes dripFlowSlow {
+            0% { transform: translateY(-18px); opacity: 0.65; }
+            65% { opacity: 0.8; }
+            100% { transform: translateY(150px); opacity: 0.7; }
+        }
+        .wrap { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
+<div class="paint-splatter" aria-hidden="true"></div>
 <div class="wrap">
     <nav class="nav">
         <a href="../../index.html">Hettie's Book Reviews</a> |

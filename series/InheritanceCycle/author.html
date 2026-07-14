@@ -7,7 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
-        body { margin: 0; font-family: Arial, sans-serif; background: #2f2a46; color: #eef3ff; padding: 24px; }
+        body { margin: 0; font-family: Arial, sans-serif; background: #2f2a46; color: #eef3ff; padding: 24px; position: relative; overflow-x: hidden; }
         .wrap { max-width: 920px; margin: 0 auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; overflow: hidden; }
         .nav { padding: 12px 16px; background: rgba(0,0,0,0.25); }
         .nav a { color: #d9e5ff; text-decoration: none; margin-right: 8px; font-family: "caVIlloni", cursive; }
@@ -15,9 +15,139 @@
         .content { padding: 20px; }
         img { width: 280px; max-width: 100%; border-radius: 10px; border: 2px solid rgba(255,255,255,0.35); }
         li { line-height: 1.5; margin-bottom: 6px; }
+        .dragon-border {
+            position: fixed;
+            inset: 10px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dragon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 62px;
+            height: 38px;
+            --dragon-dark: #2c436b;
+            --dragon-mid: #8fb1ff;
+            --dragon-light: #dbe8ff;
+            --dragon-wing-mid: #9ab8ff;
+            --dragon-wing-dark: #7da0f2;
+            --dragon-glow: rgba(175, 205, 255, 0.5);
+            transform: translate(0, 0);
+            animation: borderFlight 14s linear infinite;
+            filter: drop-shadow(0 0 6px var(--dragon-glow));
+        }
+        .dragon::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 14px;
+            width: 34px;
+            height: 9px;
+            border-radius: 6px;
+            background: linear-gradient(to right, var(--dragon-dark), var(--dragon-mid) 56%, var(--dragon-light));
+        }
+        .dragon::after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 2px;
+            width: 42px;
+            height: 32px;
+            background: linear-gradient(to bottom, var(--dragon-light), var(--dragon-wing-mid) 62%, var(--dragon-wing-dark));
+            clip-path: polygon(0% 66%, 24% 44%, 36% 6%, 55% 38%, 86% 16%, 72% 52%, 100% 70%, 68% 66%, 56% 100%, 32% 72%, 0% 84%);
+            animation: wingFlap 1s ease-in-out infinite;
+        }
+        .dragon .detail {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .dragon .detail::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 12px;
+            width: 16px;
+            height: 12px;
+            border-radius: 40% 60% 45% 55%;
+            background: linear-gradient(to right, var(--dragon-mid), var(--dragon-light));
+            box-shadow: inset -2px 0 0 rgba(0, 0, 0, 0.18);
+        }
+        .dragon .detail::after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 16px;
+            width: 22px;
+            height: 8px;
+            clip-path: polygon(0% 50%, 22% 0%, 45% 52%, 68% 8%, 88% 56%, 100% 40%, 100% 70%, 78% 82%, 54% 62%, 32% 88%, 14% 64%, 0% 74%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.08));
+            opacity: 0.85;
+        }
+        .dragon.d1 {
+            --dragon-dark: #2c436b;
+            --dragon-mid: #8fb1ff;
+            --dragon-light: #dbe8ff;
+            --dragon-wing-mid: #9ab8ff;
+            --dragon-wing-dark: #7da0f2;
+            --dragon-glow: rgba(175, 205, 255, 0.5);
+        }
+        .dragon.d2 {
+            --dragon-dark: #6a1f2a;
+            --dragon-mid: #d66776;
+            --dragon-light: #864a53;
+            --dragon-wing-mid: #d47a8a;
+            --dragon-wing-dark: #b64f60;
+            --dragon-glow: rgba(223, 107, 124, 0.5);
+            animation-duration: 16s;
+            animation-delay: -5s;
+        }
+        .dragon.d3 {
+            --dragon-dark: #24563b;
+            --dragon-mid: #66c58f;
+            --dragon-light: #436851;
+            --dragon-wing-mid: #87d6a9;
+            --dragon-wing-dark: #4da174;
+            --dragon-glow: rgba(107, 214, 154, 0.5);
+            animation-duration: 13s;
+            animation-delay: -8s;
+        }
+        .dragon.d4 {
+            --dragon-dark: #6a5420;
+            --dragon-mid: #e3be54;
+            --dragon-light: #fff0c2;
+            --dragon-wing-mid: #e3c86e;
+            --dragon-wing-dark: #bf9b3c;
+            --dragon-glow: rgba(234, 201, 107, 0.5);
+            animation-duration: 18s;
+            animation-delay: -12s;
+        }
+        @keyframes wingFlap {
+            0%, 100% { transform: scaleY(1) translateY(0); }
+            50% { transform: scaleY(0.8) translateY(2px); }
+        }
+        @keyframes borderFlight {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            24% { transform: translate(calc(100vw - 84px), 0) rotate(0deg); }
+            25% { transform: translate(calc(100vw - 84px), 0) rotate(90deg); }
+            49% { transform: translate(calc(100vw - 84px), calc(100vh - 84px)) rotate(90deg); }
+            50% { transform: translate(calc(100vw - 84px), calc(100vh - 84px)) rotate(180deg); }
+            74% { transform: translate(0, calc(100vh - 84px)) rotate(180deg); }
+            75% { transform: translate(0, calc(100vh - 84px)) rotate(270deg); }
+            99% { transform: translate(0, 0) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        .wrap { position: relative; z-index: 1; }
     </style>
 </head>
 <body>
+<div class="dragon-border" aria-hidden="true">
+    <span class="dragon d1"><span class="detail"></span></span>
+    <span class="dragon d2"><span class="detail"></span></span>
+    <span class="dragon d3"><span class="detail"></span></span>
+    <span class="dragon d4"><span class="detail"></span></span>
+</div>
 <div class="wrap">
     <nav class="nav">
         <a href="../../index.html">Hettie's Book Reviews</a> |
