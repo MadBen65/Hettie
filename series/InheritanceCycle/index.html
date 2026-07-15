@@ -16,6 +16,52 @@
             padding: 24px;
         }
 
+        .pastel-wheel {
+            position: fixed;
+            top: 10px;
+            left: auto;
+            right: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.96) 0 14px, transparent 15px),
+                conic-gradient(
+                    #ffd4df 0deg 22.5deg,
+                    #ffd8c7 22.5deg 45deg,
+                    #ffe4c7 45deg 67.5deg,
+                    #fff0c7 67.5deg 90deg,
+                    #eef7c7 90deg 112.5deg,
+                    #dcf6c8 112.5deg 135deg,
+                    #c9f6d3 135deg 157.5deg,
+                    #c6f7e7 157.5deg 180deg,
+                    #c6f2ff 180deg 202.5deg,
+                    #c9e5ff 202.5deg 225deg,
+                    #d2dbff 225deg 247.5deg,
+                    #ddd3ff 247.5deg 270deg,
+                    #e9d0ff 270deg 292.5deg,
+                    #f3ceff 292.5deg 315deg,
+                    #ffcee9 315deg 337.5deg,
+                    #ffd1da 337.5deg 360deg
+                );
+            border: 2px solid rgba(255, 255, 255, 0.62);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.32), 0 0 26px rgba(193, 216, 255, 0.24);
+            opacity: 1;
+            z-index: 3;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 0 42%, rgba(0, 0, 0, 0.96) 58%, rgba(0, 0, 0, 0.28) 78%, rgba(0, 0, 0, 0) 100%);
+            animation: pastelWheelSpin 22s linear infinite;
+        }
+
+        .pastel-wheel::after {
+            content: "";
+            position: absolute;
+            inset: 6px;
+            border-radius: 50%;
+            border: 1px dashed rgba(255, 255, 255, 0.72);
+            opacity: 0.82;
+        }
+
         .wrap {
             max-width: 980px;
             margin: 0 auto;
@@ -364,6 +410,11 @@
             }
         }
 
+        @keyframes pastelWheelSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .card h2 {
             margin: 10px 0 6px;
             font-size: 1.1rem;
@@ -382,6 +433,7 @@
     </style>
 </head>
 <body>
+    <div class="pastel-wheel" aria-hidden="true"></div>
     <div class="wrap">
         <nav class="nav">
             <a href="../../index.html">Hettie's Book Reviews</a> |
