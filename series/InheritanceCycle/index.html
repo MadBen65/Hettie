@@ -62,6 +62,222 @@
             opacity: 0.82;
         }
 
+        .egg-cluster {
+            position: fixed;
+            bottom: 26px;
+            right: 34px;
+            width: 168px;
+            height: 128px;
+            transform: scale(1.22);
+            transform-origin: bottom right;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .egg-cluster::before {
+            content: "";
+            position: absolute;
+            left: 3px;
+            right: 0;
+            bottom: 0;
+            height: 26px;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55) 0 52%, rgba(0, 0, 0, 0.08) 75%, rgba(0, 0, 0, 0) 100%);
+            filter: blur(4px);
+            z-index: 0;
+        }
+
+        .egg {
+            position: absolute;
+            width: 42px;
+            height: 56px;
+            border-radius: var(--egg-radius, 52% 52% 48% 48% / 62% 62% 38% 38%);
+            border: 1px solid rgba(205, 226, 255, 0.16);
+            box-shadow: var(--drop-shadow, 0 14px 21px rgba(1, 3, 12, 0.8)), inset -12px -15px 17px rgba(0, 0, 0, 0.58), inset 5px 9px 11px rgba(238, 248, 255, 0.14), 0 0 10px rgba(82, 139, 207, 0.16);
+            overflow: hidden;
+            animation: eggBob 3.2s ease-in-out infinite;
+            filter: saturate(1) contrast(1.12);
+            z-index: 1;
+        }
+
+        .egg::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(circle at 50% 120%, var(--scale-bright, rgba(212, 236, 255, 0.36)) 0 3.4px, rgba(15, 32, 58, 0) 4.2px) 0 0 / 9px 8px repeat,
+                radial-gradient(circle at 50% 120%, var(--scale-mid, rgba(138, 176, 208, 0.3)) 0 3.2px, rgba(15, 32, 58, 0) 4px) 4.5px 3.5px / 9px 8px repeat,
+                radial-gradient(circle at 50% 120%, rgba(24, 46, 76, 0.46) 0 2.3px, rgba(15, 32, 58, 0) 3.4px) 2px 1px / var(--micro-scale-x, 7px) var(--micro-scale-y, 6px) repeat,
+                radial-gradient(circle at 16% 18%, rgba(16, 29, 49, 0.24) 0 1px, rgba(16, 29, 49, 0) 1.6px),
+                radial-gradient(circle at 62% 42%, rgba(239, 247, 255, 0.14) 0 0.9px, rgba(239, 247, 255, 0) 1.5px),
+                radial-gradient(circle at 78% 66%, rgba(12, 25, 44, 0.22) 0 1px, rgba(12, 25, 44, 0) 1.6px),
+                radial-gradient(circle at 34% 74%, rgba(240, 248, 255, 0.12) 0 0.9px, rgba(240, 248, 255, 0) 1.5px);
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.96) 30%, rgba(0, 0, 0, 1) 100%);
+            opacity: 0.9;
+            mix-blend-mode: normal;
+            pointer-events: none;
+        }
+
+        .egg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background:
+                radial-gradient(ellipse at var(--hl-x, 22%) var(--hl-y, 14%), rgba(255, 255, 255, 0.58) 0 11%, rgba(255, 255, 255, 0) 39%),
+                radial-gradient(ellipse at var(--hl2-x, 36%) var(--hl2-y, 26%), rgba(234, 247, 255, 0.28) 0 9%, rgba(234, 247, 255, 0) 33%),
+                radial-gradient(ellipse at var(--shadow-x, 82%) var(--shadow-y, 84%), rgba(0, 0, 0, 0.64) 0 33%, rgba(0, 0, 0, 0) 63%),
+                linear-gradient(150deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 34%, rgba(3, 7, 18, 0.62) 100%),
+                linear-gradient(92deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 18%);
+            pointer-events: none;
+        }
+
+        .egg:nth-child(1) {
+            left: 12px;
+            top: 64px;
+            width: 52px;
+            height: 39px;
+            z-index: 4;
+            --egg-radius: 56% 50% 49% 45% / 60% 64% 36% 40%;
+            --drop-shadow: 0 16px 24px rgba(0, 2, 10, 0.86);
+            --hl-x: 19%;
+            --hl-y: 14%;
+            --hl2-x: 34%;
+            --hl2-y: 27%;
+            --shadow-x: 86%;
+            --shadow-y: 82%;
+            --micro-scale-x: 6px;
+            --micro-scale-y: 5px;
+            --scale-bright: rgba(164, 205, 255, 0.4);
+            --scale-mid: rgba(102, 151, 214, 0.28);
+            transform: rotate(-54deg);
+            background:
+                radial-gradient(circle at 15% 108%, rgba(194, 226, 255, 0.28) 0 9px, rgba(10, 24, 50, 0) 10px),
+                radial-gradient(circle at 50% 108%, rgba(194, 226, 255, 0.24) 0 9px, rgba(10, 24, 50, 0) 10px),
+                radial-gradient(circle at 85% 108%, rgba(194, 226, 255, 0.27) 0 9px, rgba(10, 24, 50, 0) 10px),
+                radial-gradient(circle at 32% 96%, rgba(194, 226, 255, 0.23) 0 8px, rgba(10, 24, 50, 0) 9px),
+                radial-gradient(circle at 68% 96%, rgba(194, 226, 255, 0.2) 0 8px, rgba(10, 24, 50, 0) 9px),
+                linear-gradient(180deg, #5a95f0 0%, #122a4e 100%);
+        }
+
+        .egg:nth-child(2) {
+            left: 8px;
+            top: 30px;
+            width: 40px;
+            height: 53px;
+            z-index: 1;
+            opacity: 0.92;
+            --egg-radius: 50% 54% 46% 50% / 64% 59% 41% 36%;
+            --drop-shadow: 0 13px 19px rgba(1, 3, 12, 0.72);
+            --hl-x: 20%;
+            --hl-y: 13%;
+            --hl2-x: 35%;
+            --hl2-y: 26%;
+            --shadow-x: 79%;
+            --shadow-y: 88%;
+            --micro-scale-x: 8px;
+            --micro-scale-y: 6px;
+            --scale-bright: rgba(207, 231, 156, 0.4);
+            --scale-mid: rgba(139, 172, 82, 0.28);
+            transform: rotate(4deg);
+            animation-delay: -0.6s;
+            background:
+                radial-gradient(circle at 15% 108%, rgba(215, 239, 255, 0.26) 0 9px, rgba(16, 30, 58, 0) 10px),
+                radial-gradient(circle at 50% 108%, rgba(215, 239, 255, 0.22) 0 9px, rgba(16, 30, 58, 0) 10px),
+                radial-gradient(circle at 85% 108%, rgba(215, 239, 255, 0.25) 0 9px, rgba(16, 30, 58, 0) 10px),
+                radial-gradient(circle at 32% 96%, rgba(215, 239, 255, 0.21) 0 8px, rgba(16, 30, 58, 0) 9px),
+                radial-gradient(circle at 68% 96%, rgba(215, 239, 255, 0.19) 0 8px, rgba(16, 30, 58, 0) 9px),
+                linear-gradient(180deg, #89b747 0%, #293f1d 100%);
+        }
+
+        .egg:nth-child(3) {
+            left: 58px;
+            top: 50px;
+            width: 46px;
+            height: 61px;
+            z-index: 4;
+            --egg-radius: 54% 49% 47% 52% / 66% 61% 35% 39%;
+            --drop-shadow: 0 18px 25px rgba(0, 2, 10, 0.88);
+            --hl-x: 21%;
+            --hl-y: 14%;
+            --hl2-x: 35%;
+            --hl2-y: 27%;
+            --shadow-x: 83%;
+            --shadow-y: 86%;
+            --micro-scale-x: 6px;
+            --micro-scale-y: 5px;
+            --scale-bright: rgba(204, 165, 246, 0.4);
+            --scale-mid: rgba(145, 96, 201, 0.3);
+            transform: rotate(-2deg);
+            animation-delay: -1.2s;
+            background:
+                radial-gradient(circle at 15% 108%, rgba(201, 232, 255, 0.25) 0 9px, rgba(13, 28, 50, 0) 10px),
+                radial-gradient(circle at 50% 108%, rgba(201, 232, 255, 0.22) 0 9px, rgba(13, 28, 50, 0) 10px),
+                radial-gradient(circle at 85% 108%, rgba(201, 232, 255, 0.24) 0 9px, rgba(13, 28, 50, 0) 10px),
+                radial-gradient(circle at 32% 96%, rgba(201, 232, 255, 0.2) 0 8px, rgba(13, 28, 50, 0) 9px),
+                radial-gradient(circle at 68% 96%, rgba(201, 232, 255, 0.18) 0 8px, rgba(13, 28, 50, 0) 9px),
+                linear-gradient(180deg, #a366dd 0%, #331a49 100%);
+        }
+
+        .egg:nth-child(4) {
+            left: 86px;
+            top: 26px;
+            width: 41px;
+            height: 54px;
+            z-index: 1;
+            opacity: 0.92;
+            --egg-radius: 51% 53% 48% 47% / 63% 60% 40% 37%;
+            --drop-shadow: 0 12px 18px rgba(1, 3, 12, 0.7);
+            --hl-x: 20%;
+            --hl-y: 14%;
+            --hl2-x: 34%;
+            --hl2-y: 27%;
+            --shadow-x: 78%;
+            --shadow-y: 87%;
+            --micro-scale-x: 8px;
+            --micro-scale-y: 6px;
+            --scale-bright: rgba(186, 214, 247, 0.4);
+            --scale-mid: rgba(119, 154, 201, 0.28);
+            transform: rotate(8deg);
+            animation-delay: -0.3s;
+            background:
+                radial-gradient(circle at 15% 108%, rgba(198, 229, 255, 0.28) 0 9px, rgba(17, 31, 58, 0) 10px),
+                radial-gradient(circle at 50% 108%, rgba(198, 229, 255, 0.24) 0 9px, rgba(17, 31, 58, 0) 10px),
+                radial-gradient(circle at 85% 108%, rgba(198, 229, 255, 0.27) 0 9px, rgba(17, 31, 58, 0) 10px),
+                radial-gradient(circle at 32% 96%, rgba(198, 229, 255, 0.22) 0 8px, rgba(17, 31, 58, 0) 9px),
+                radial-gradient(circle at 68% 96%, rgba(198, 229, 255, 0.2) 0 8px, rgba(17, 31, 58, 0) 9px),
+                linear-gradient(180deg, #6ea1d6 0%, #1c2a3f 100%);
+        }
+
+        .egg:nth-child(5) {
+            left: 102px;
+            top: 66px;
+            width: 51px;
+            height: 38px;
+            z-index: 4;
+            --egg-radius: 53% 49% 51% 47% / 61% 65% 35% 42%;
+            --drop-shadow: 0 15px 23px rgba(1, 2, 10, 0.84);
+            --hl-x: 21%;
+            --hl-y: 15%;
+            --hl2-x: 35%;
+            --hl2-y: 28%;
+            --shadow-x: 86%;
+            --shadow-y: 83%;
+            --micro-scale-x: 6px;
+            --micro-scale-y: 5px;
+            --scale-bright: rgba(236, 192, 144, 0.4);
+            --scale-mid: rgba(174, 117, 74, 0.3);
+            transform: rotate(56deg);
+            animation-delay: -1.5s;
+            background:
+                radial-gradient(circle at 15% 108%, rgba(203, 232, 255, 0.28) 0 9px, rgba(13, 28, 52, 0) 10px),
+                radial-gradient(circle at 50% 108%, rgba(203, 232, 255, 0.24) 0 9px, rgba(13, 28, 52, 0) 10px),
+                radial-gradient(circle at 85% 108%, rgba(203, 232, 255, 0.27) 0 9px, rgba(13, 28, 52, 0) 10px),
+                radial-gradient(circle at 32% 96%, rgba(203, 232, 255, 0.22) 0 8px, rgba(13, 28, 52, 0) 9px),
+                radial-gradient(circle at 68% 96%, rgba(203, 232, 255, 0.2) 0 8px, rgba(13, 28, 52, 0) 9px),
+                linear-gradient(180deg, #c6783e 0%, #321a12 100%);
+        }
+
         .wrap {
             max-width: 980px;
             margin: 0 auto;
@@ -415,6 +631,31 @@
             100% { transform: rotate(360deg); }
         }
 
+        @keyframes eggBob {
+            0%,
+            100% {
+                transform: translateY(0px) rotate(var(--egg-rot, 0deg));
+            }
+            50% {
+                transform: translateY(-3px) rotate(var(--egg-rot, 0deg));
+            }
+        }
+
+        .egg:nth-child(1) { --egg-rot: -54deg; }
+        .egg:nth-child(2) { --egg-rot: 4deg; }
+        .egg:nth-child(3) { --egg-rot: -2deg; }
+        .egg:nth-child(4) { --egg-rot: 8deg; }
+        .egg:nth-child(5) { --egg-rot: 56deg; }
+
+        @media (max-width: 700px) {
+            .egg-cluster {
+                right: 12px;
+                bottom: 14px;
+                transform: scale(0.98);
+                transform-origin: bottom right;
+            }
+        }
+
         .card h2 {
             margin: 10px 0 6px;
             font-size: 1.1rem;
@@ -434,6 +675,13 @@
 </head>
 <body>
     <div class="pastel-wheel" aria-hidden="true"></div>
+    <div class="egg-cluster" aria-hidden="true">
+        <span class="egg"></span>
+        <span class="egg"></span>
+        <span class="egg"></span>
+        <span class="egg"></span>
+        <span class="egg"></span>
+    </div>
     <div class="wrap">
         <nav class="nav">
             <a href="../../index.html">Hettie's Book Reviews</a> |
