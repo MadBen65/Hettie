@@ -20,6 +20,14 @@
             height: 420px;
             margin: 24px auto;
         }
+        .fire-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
         .blade {
             position: absolute;
             left: 50%;
@@ -27,6 +35,7 @@
             width: 330px;
             height: 16px;
             transform-origin: 50% 50%;
+            z-index: 1;
         }
         .blade::before {
             content: "";
@@ -287,11 +296,130 @@
             Brisingr is the third book in the Inheritance Cycle series by Christopher Paolini. It continues the story of Eragon, a teenage Dragon Rider, as he faces new challenges and adventures in his quest to defeat the evil king Galbatorix. The book delves deeper into the lore of Alagaësia, exploring themes of courage, responsibility, and the consequences of power. Eragon must navigate intense battles, political pressure, and key personal truths as he forges his own path and prepares for the final confrontation. His mentor, who died in the first book, is revealed to be his father. He also forges a Rider's sword, which he named Brisingr and whenever he speaks its name, it ignites in cobalt flames.
         </p>
         <div class="blade-stage" aria-hidden="true">
+            <canvas id="fireCanvas" class="fire-canvas"></canvas>
             <div class="blade red"><span class="flame"></span><span class="sparks"></span><span class="rune">zar`oc</span></div>
             <div class="blade blue"><span class="flame"></span><span class="sparks"></span><span class="rune">brisingr</span></div>
         </div>
         <img src="https://m.media-amazon.com/images/I/81IM5r9kRsL._AC_UF894,1000_QL80_.jpg" alt="Brisingr Book Cover">
     </section>
 </div>
+<script>
+    (function () {
+        const canvas = document.getElementById('fireCanvas');
+        if (!canvas) return;
+        const redBlade = document.querySelector('.blade.red');
+        const blueBlade = document.querySelector('.blade.blue');
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const particles = [];
+        const maxParticles = 180;
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+
+        function getBladeEmitter(blade, fallbackX) {
+            if (!blade) {
+                return { x: width * fallbackX, y: height * 0.52 };
+            }
+
+            const canvasRect = canvas.getBoundingClientRect();
+            const bladeRect = blade.getBoundingClientRect();
+
+            return {
+                x: (bladeRect.left - canvasRect.left) + (bladeRect.width * 0.58),
+                y: (bladeRect.top - canvasRect.top) + (bladeRect.height * 0.54)
+            };
+        }
+
+        function resize() {
+            const rect = canvas.getBoundingClientRect();
+            width = Math.max(1, Math.floor(rect.width));
+            height = Math.max(1, Math.floor(rect.height));
+            dpr = Math.min(2, window.devicePixelRatio || 1);
+            canvas.width = Math.floor(width * dpr);
+            canvas.height = Math.floor(height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function rand(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function spawnParticle(emitter, hueMin, hueMax, vxMin, vxMax) {
+            particles.push({
+                x: emitter.x + rand(-16, 16),
+                y: emitter.y + rand(-10, 10),
+                vx: rand(vxMin, vxMax),
+                vy: rand(-1.8, -0.6),
+                r: rand(6, 18),
+                life: rand(0.65, 1.2),
+                age: 0,
+                hue: rand(hueMin, hueMax)
+            });
+        }
+
+        function drawParticle(p) {
+            const t = p.age / p.life;
+            const alpha = Math.max(0, 0.8 - t);
+            const radius = p.r * (1 + t * 0.55);
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, radius);
+
+            grad.addColorStop(0, `hsla(${p.hue}, 100%, 78%, ${alpha})`);
+            grad.addColorStop(0.42, `hsla(${p.hue + 8}, 100%, 62%, ${alpha * 0.8})`);
+            grad.addColorStop(1, `hsla(${p.hue + 16}, 100%, 38%, 0)`);
+
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function step() {
+            ctx.clearRect(0, 0, width, height);
+
+            const baseGlow = ctx.createLinearGradient(0, height, 0, 0);
+            baseGlow.addColorStop(0, 'rgba(25, 132, 255, 0.35)');
+            baseGlow.addColorStop(0.5, 'rgba(18, 89, 210, 0.15)');
+            baseGlow.addColorStop(1, 'rgba(12, 52, 140, 0)');
+            ctx.fillStyle = baseGlow;
+            ctx.fillRect(0, 0, width, height);
+
+            ctx.globalCompositeOperation = 'lighter';
+
+            while (particles.length < maxParticles) {
+                const blueEmitter = getBladeEmitter(blueBlade, 0.62);
+                const redEmitter = getBladeEmitter(redBlade, 0.38);
+                spawnParticle(blueEmitter, 190, 220, -0.5, 0.2);
+                if (particles.length < maxParticles) {
+                    spawnParticle(redEmitter, 4, 20, -0.2, 0.5);
+                }
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.age += 0.016;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vx += rand(-0.02, 0.02);
+
+                if (p.age >= p.life || p.y < -30) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                drawParticle(p);
+            }
+
+            ctx.globalCompositeOperation = 'source-over';
+            requestAnimationFrame(step);
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        requestAnimationFrame(step);
+    })();
+</script>
 </body>
 </html>
