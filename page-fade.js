@@ -1,4 +1,5 @@
 (function () {
+    const root = document.documentElement;
     const body = document.body;
     if (!body) {
         return;
@@ -9,6 +10,8 @@
 
     function revealPage() {
         requestAnimationFrame(function () {
+            root.classList.add("page-fade-ready");
+            root.classList.remove("page-fade-exit");
             body.classList.add("page-fade-ready");
             body.classList.remove("page-fade-exit");
         });
@@ -55,6 +58,7 @@
             window.location.href = targetUrl.href;
         }
 
+        root.classList.add("page-fade-exit");
         body.classList.add("page-fade-exit");
 
         if (transitionMs === 0) {
