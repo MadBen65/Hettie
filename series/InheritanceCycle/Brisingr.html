@@ -309,6 +309,7 @@
         if (!canvas) return;
         const redBlade = document.querySelector('.blade.red');
         const blueBlade = document.querySelector('.blade.blue');
+        const bladeStage = document.querySelector('.blade-stage');
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -319,20 +320,28 @@
         let height = 0;
         let dpr = 1;
 
-        function getBladeEmitter(blade, fallbackX) {
-            if (!blade) {
+        function getBladeEmitter(isRed) {
+            if (!bladeStage) {
                 return {
-                    x: width * fallbackX + rand(-28, 28),
-                    y: height * 0.52 + rand(-22, 22)
+                    x: width * (isRed ? 0.4 : 0.6) + rand(-14, 14),
+                    y: height * 0.52 + rand(-14, 14)
                 };
             }
 
+            const stageRect = bladeStage.getBoundingClientRect();
             const canvasRect = canvas.getBoundingClientRect();
-            const bladeRect = blade.getBoundingClientRect();
+            const centerX = (stageRect.left - canvasRect.left) + (stageRect.width * 0.5);
+            const centerY = (stageRect.top - canvasRect.top) + (stageRect.height * 0.5);
+
+            const angle = isRed ? (Math.PI / 4) : (-Math.PI / 4);
+            const along = rand(-118, 134);
+            const across = rand(-8, 8);
+            const cosA = Math.cos(angle);
+            const sinA = Math.sin(angle);
 
             return {
-                x: (bladeRect.left - canvasRect.left) + (bladeRect.width * rand(0.22, 0.78)),
-                y: (bladeRect.top - canvasRect.top) + (bladeRect.height * rand(0.3, 0.7))
+                x: centerX + (cosA * along) - (sinA * across),
+                y: centerY + (sinA * along) + (cosA * across)
             };
         }
 
@@ -392,8 +401,8 @@
             ctx.globalCompositeOperation = 'lighter';
 
             while (particles.length < maxParticles) {
-                const blueEmitter = getBladeEmitter(blueBlade, 0.62);
-                const redEmitter = getBladeEmitter(redBlade, 0.38);
+                const blueEmitter = getBladeEmitter(false);
+                const redEmitter = getBladeEmitter(true);
                 spawnParticle(blueEmitter, 190, 220, -0.5, 0.2);
                 if (particles.length < maxParticles) {
                     spawnParticle(redEmitter, 4, 20, -0.2, 0.5);
