@@ -5,7 +5,7 @@
     }
 
     const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const transitionMs = reducedMotion ? 0 : 320;
+    const transitionMs = reducedMotion ? 0 : 1320;
 
     function revealPage() {
         requestAnimationFrame(function () {
