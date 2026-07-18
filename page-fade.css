@@ -3,6 +3,12 @@ body {
     transition: opacity 1320ms ease;
 }
 
+html,
+body {
+    transition: opacity 1320ms ease, filter 1320ms ease;
+    filter: saturate(1) brightness(1);
+}
+
 html::before,
 html::after {
     transition: opacity 1320ms ease !important;
@@ -16,13 +22,25 @@ body.page-fade-exit {
     opacity: 0;
 }
 
+html.page-fade-exit,
+body.page-fade-exit {
+    filter: saturate(0.2) brightness(0.08);
+}
+
 html.page-fade-exit::before,
 html.page-fade-exit::after {
     opacity: 0 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
+    html,
     body {
         transition: none;
+        filter: none;
+    }
+
+    html::before,
+    html::after {
+        transition: none !important;
     }
 }
