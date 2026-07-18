@@ -1,0 +1,18 @@
+body {
+    opacity: 0;
+    transition: opacity 320ms ease;
+}
+
+body.page-fade-ready {
+    opacity: 1;
+}
+
+body.page-fade-exit {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body {
+        transition: none;
+    }
+}
