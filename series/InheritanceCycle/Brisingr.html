@@ -321,15 +321,18 @@
 
         function getBladeEmitter(blade, fallbackX) {
             if (!blade) {
-                return { x: width * fallbackX, y: height * 0.52 };
+                return {
+                    x: width * fallbackX + rand(-28, 28),
+                    y: height * 0.52 + rand(-22, 22)
+                };
             }
 
             const canvasRect = canvas.getBoundingClientRect();
             const bladeRect = blade.getBoundingClientRect();
 
             return {
-                x: (bladeRect.left - canvasRect.left) + (bladeRect.width * 0.58),
-                y: (bladeRect.top - canvasRect.top) + (bladeRect.height * 0.54)
+                x: (bladeRect.left - canvasRect.left) + (bladeRect.width * rand(0.22, 0.78)),
+                y: (bladeRect.top - canvasRect.top) + (bladeRect.height * rand(0.3, 0.7))
             };
         }
 
@@ -349,8 +352,8 @@
 
         function spawnParticle(emitter, hueMin, hueMax, vxMin, vxMax) {
             particles.push({
-                x: emitter.x + rand(-16, 16),
-                y: emitter.y + rand(-10, 10),
+                x: emitter.x + rand(-8, 8),
+                y: emitter.y + rand(-6, 6),
                 vx: rand(vxMin, vxMax),
                 vy: rand(-1.8, -0.6),
                 r: rand(6, 18),
