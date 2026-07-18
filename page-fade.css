@@ -10,26 +10,7 @@ body {
 
 html,
 body {
-    transition: opacity var(--page-fade-ms) var(--page-fade-ease), filter var(--page-fade-ms) var(--page-fade-ease), transform var(--page-fade-ms) var(--page-fade-ease);
-    filter: saturate(1) brightness(1);
-}
-
-html::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2147483646;
-    opacity: 0;
-    background:
-        radial-gradient(circle at 18% 24%, rgba(255, 70, 100, 0.42), rgba(255, 70, 100, 0) 42%),
-        radial-gradient(circle at 78% 22%, rgba(70, 150, 255, 0.45), rgba(70, 150, 255, 0) 46%),
-        radial-gradient(circle at 52% 78%, rgba(120, 255, 180, 0.34), rgba(120, 255, 180, 0) 48%),
-        linear-gradient(132deg, rgba(255, 190, 100, 0.14), rgba(120, 120, 255, 0.16));
-    mix-blend-mode: screen;
-    transform: scale(1);
-    filter: saturate(1.15) blur(0px);
-    transition: opacity var(--page-fade-ms) var(--page-fade-ease), transform var(--page-fade-ms) var(--page-fade-ease), filter var(--page-fade-ms) var(--page-fade-ease);
+    transition: opacity var(--page-fade-ms) var(--page-fade-ease);
 }
 
 html::before,
@@ -47,31 +28,25 @@ body.page-fade-exit {
 
 html.page-fade-exit,
 body.page-fade-exit {
-    filter: saturate(1.35) brightness(0.56) contrast(1.08) hue-rotate(14deg);
-    transform: scale(1.01);
+    opacity: 0;
 }
 
 html.page-fade-exit::after {
-    opacity: 0.58 !important;
-    transform: scale(1.06);
-    filter: saturate(1.45) blur(0.5px);
+    opacity: 0 !important;
 }
 
 html.page-fade-exit::before {
-    opacity: 0.28 !important;
+    opacity: 0 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
     html,
     body {
         transition: none;
-        filter: none;
     }
 
     html::before,
     html::after {
         transition: none !important;
-        transform: none !important;
-        filter: none !important;
     }
 }
