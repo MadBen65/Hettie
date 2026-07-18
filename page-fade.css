@@ -3,9 +3,36 @@
     --page-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: var(--page-fade-ms);
+    animation-timing-function: var(--page-fade-ease);
+}
+
+::view-transition-old(root) {
+    animation-name: pageBlendOut;
+}
+
+::view-transition-new(root) {
+    animation-name: pageBlendIn;
+}
+
+@keyframes pageBlendOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes pageBlendIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 body {
-    opacity: 0;
-    transition: opacity var(--page-fade-ms) var(--page-fade-ease);
+    opacity: 1;
 }
 
 html,
@@ -18,24 +45,28 @@ html::after {
     transition: opacity var(--page-fade-ms) var(--page-fade-ease) !important;
 }
 
-body.page-fade-ready {
+body.page-fade-fallback {
+    opacity: 0;
+}
+
+body.page-fade-fallback.page-fade-ready {
     opacity: 1;
 }
 
-body.page-fade-exit {
+body.page-fade-fallback.page-fade-exit {
     opacity: 0;
 }
 
-html.page-fade-exit,
-body.page-fade-exit {
+html.page-fade-fallback.page-fade-exit,
+body.page-fade-fallback.page-fade-exit {
     opacity: 0;
 }
 
-html.page-fade-exit::after {
+html.page-fade-fallback.page-fade-exit::after {
     opacity: 0 !important;
 }
 
-html.page-fade-exit::before {
+html.page-fade-fallback.page-fade-exit::before {
     opacity: 0 !important;
 }
 

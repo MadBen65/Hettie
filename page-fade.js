@@ -5,6 +5,18 @@
         return;
     }
 
+    const supportsViewTransition = "startViewTransition" in document;
+
+    if (supportsViewTransition) {
+        body.classList.add("page-fade-ready");
+        root.classList.remove("page-fade-exit");
+        body.classList.remove("page-fade-exit");
+        return;
+    }
+
+    root.classList.add("page-fade-fallback");
+    body.classList.add("page-fade-fallback");
+
     const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function parseDurationMs(value) {
