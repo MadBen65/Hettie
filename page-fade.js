@@ -6,7 +6,24 @@
     }
 
     const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const transitionMs = reducedMotion ? 0 : 1320;
+
+    function parseDurationMs(value) {
+        if (!value) {
+            return 1320;
+        }
+        const trimmed = value.trim();
+        if (trimmed.endsWith("ms")) {
+            return Number.parseFloat(trimmed);
+        }
+        if (trimmed.endsWith("s")) {
+            return Number.parseFloat(trimmed) * 1000;
+        }
+        const numeric = Number.parseFloat(trimmed);
+        return Number.isFinite(numeric) ? numeric : 1320;
+    }
+
+    const cssDuration = getComputedStyle(root).getPropertyValue("--page-fade-ms");
+    const transitionMs = reducedMotion ? 0 : parseDurationMs(cssDuration);
 
     function revealPage() {
         requestAnimationFrame(function () {
