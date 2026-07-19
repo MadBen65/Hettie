@@ -33,50 +33,32 @@
 
 body {
     opacity: 1;
+    filter: brightness(1);
 }
 
 html,
 body {
-    transition: opacity var(--page-fade-ms) var(--page-fade-ease);
-}
-
-html::before,
-html::after {
-    transition: opacity var(--page-fade-ms) var(--page-fade-ease) !important;
+    transition: filter var(--page-fade-ms) var(--page-fade-ease);
 }
 
 body.page-fade-fallback {
-    opacity: 0.35;
+    opacity: 1;
+    filter: brightness(0.94);
 }
 
 body.page-fade-fallback.page-fade-ready {
     opacity: 1;
+    filter: brightness(1);
 }
 
 body.page-fade-fallback.page-fade-exit {
-    opacity: 0.35;
-}
-
-body.page-fade-fallback.page-fade-exit {
-    opacity: 0;
-}
-
-html.page-fade-fallback.page-fade-exit::after {
-    opacity: 0 !important;
-}
-
-html.page-fade-fallback.page-fade-exit::before {
-    opacity: 0 !important;
+    opacity: 1;
+    filter: brightness(0.94);
 }
 
 @media (prefers-reduced-motion: reduce) {
     html,
     body {
         transition: none;
-    }
-
-    html::before,
-    html::after {
-        transition: none !important;
     }
 }
