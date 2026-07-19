@@ -6,8 +6,9 @@
     }
 
     const supportsViewTransition = "startViewTransition" in document;
+    const prefersFallbackFade = window.location.protocol === "file:";
 
-    if (supportsViewTransition) {
+    if (supportsViewTransition && !prefersFallbackFade) {
         body.classList.add("page-fade-ready");
         root.classList.remove("page-fade-exit");
         body.classList.remove("page-fade-exit");
