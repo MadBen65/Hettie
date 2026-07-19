@@ -3,10 +3,6 @@
     --page-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-html {
-    background-color: #05070f;
-}
-
 @view-transition {
     navigation: auto;
 }
@@ -50,7 +46,7 @@ html::after {
 }
 
 body.page-fade-fallback {
-    opacity: 1;
+    opacity: 0.35;
 }
 
 body.page-fade-fallback.page-fade-ready {
@@ -58,7 +54,7 @@ body.page-fade-fallback.page-fade-ready {
 }
 
 body.page-fade-fallback.page-fade-exit {
-    opacity: 0;
+    opacity: 0.35;
 }
 
 body.page-fade-fallback.page-fade-exit {
