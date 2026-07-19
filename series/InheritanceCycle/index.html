@@ -7,6 +7,625 @@
     <script defer src="../../page-fade.js"></script>
     <title>The Inheritance Cycle</title>
     <style>
+        
+        body { margin: 0; font-family: Arial, sans-serif; background: #2f2a46; color: #eef3ff; padding: 24px; position: relative; overflow-x: hidden; }
+        .wrap { max-width: 920px; margin: 0 auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; overflow: hidden; }
+        .nav { padding: 12px 16px; background: rgba(0,0,0,0.25); }
+        .nav a { color: #d9e5ff; text-decoration: none; margin-right: 8px; font-family: "caVIlloni", cursive; }
+        h1, h2, h3 { font-family: 'Cinzel Decorative', Georgia, serif; }
+        .content { padding: 20px; }
+        img { width: 280px; max-width: 100%; border-radius: 10px; border: 2px solid rgba(255,255,255,0.35); }
+        li { line-height: 1.5; margin-bottom: 6px; }
+        .dragon-border {
+            position: fixed;
+            inset: 10px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .dragon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 28px;
+            --dragon-dark: #2c436b;
+            --dragon-mid: #8fb1ff;
+            --dragon-light: #dbe8ff;
+            --dragon-wing-mid: #9ab8ff;
+            --dragon-wing-dark: #7da0f2;
+            --dragon-glow: rgba(175, 205, 255, 0.5);
+            --dragon-size: 1;
+            --dragon-scale-x: 1;
+            --dragon-scale-y: 1;
+            --body-scale-x: 7px;
+            --body-scale-y: 5px;
+            --body-scale-hi: rgba(255, 255, 255, 0.34);
+            --body-scale-mid: rgba(8, 14, 24, 0.42);
+            --body-scale-shine: rgba(255, 255, 255, 0.18);
+            --body-scale-opacity: 0.78;
+            --fire-hot: #fff4ca;
+            --fire-mid: #ffb04a;
+            --fire-cool: #ff4f00;
+            --fire-smoke: rgba(255, 34, 0, 0.15);
+            --fire-glow: rgba(255, 142, 35, 0.8);
+            --fire-core-hot: rgba(255, 255, 230, 0.95);
+            --fire-core-mid: rgba(255, 224, 118, 0.92);
+            --fire-core-fade: rgba(255, 154, 34, 0);
+            --fire-aura-1: rgba(255, 253, 228, 0.46);
+            --fire-aura-2: rgba(255, 200, 100, 0.34);
+            --dragon-layer: 3;
+            transform: translate(0, 0);
+            animation: borderFlight1 14s linear infinite;
+            filter: drop-shadow(0 0 6px var(--dragon-glow));
+            z-index: var(--dragon-layer);
+        }
+        .dragon .tail {
+            position: absolute;
+            left: -5px;
+            top:17px;
+            width:17px;
+            height: 6px;
+            border-radius: 72% 28% 42% 58% / 50% 50% 50% 50%;
+            transform-origin: 100% 50%;
+            background: linear-gradient(to left, var(--dragon-dark), var(--dragon-mid) 64%, var(--dragon-light));
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.14), inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+            animation: tailSway 1.34s ease-in-out infinite;
+            z-index: 0;
+        }
+        .dragon .tail::before,
+        .dragon .tail::after {
+            content: "";
+            position: absolute;
+            left: -9px;
+            width: 9px;
+            height: 3px;
+            background: linear-gradient(to left, var(--dragon-mid), var(--dragon-light));
+            clip-path: polygon(0% 50%, 60% 0%, 100% 50%, 60% 100%);
+            opacity: 0.88;
+            transform-origin: 100% 50%;
+        }
+        .dragon .tail::before {
+            top: 1px;
+            transform: rotate(-18deg);
+        }
+        .dragon .tail::after {
+            top: 2px;
+            transform: rotate(18deg);
+        }
+        .dragon::before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 14px;
+            width: 34px;
+            height: 9px;
+            border-radius: 6px;
+            background: linear-gradient(to right, var(--dragon-dark), var(--dragon-mid) 56%, var(--dragon-light));
+        }
+        .dragon::after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            top: 1px;
+            width: 46px;
+            height: 34px;
+            transform-origin: 82% 76%;
+            background:
+                linear-gradient(132deg, rgba(255, 255, 255, 0.52) 0 18%, rgba(255, 255, 255, 0) 46%),
+                radial-gradient(ellipse at 78% 78%, rgba(16, 23, 39, 0.34) 0 42%, rgba(16, 23, 39, 0) 75%),
+                linear-gradient(160deg, var(--dragon-light) 0%, var(--dragon-wing-mid) 46%, var(--dragon-wing-dark) 100%);
+            clip-path: polygon(0% 80%, 12% 62%, 22% 44%, 33% 14%, 47% 30%, 59% 10%, 70% 40%, 88% 18%, 82% 50%, 100% 62%, 79% 68%, 69% 100%, 50% 74%, 35% 92%, 21% 70%, 0% 92%);
+            box-shadow: inset -3px -2px 4px rgba(0, 0, 0, 0.22);
+            animation: wingFlap 1.34s ease-in-out infinite, wingMembraneMorph 1.34s ease-in-out infinite;
+        }
+        .dragon .wing-veins {
+            position: absolute;
+            left: 7px;
+            top: 4px;
+            width: 38px;
+            height: 28px;
+            background:
+                linear-gradient(142deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0) 42%),
+                linear-gradient(160deg, rgba(25, 33, 52, 0.52), rgba(25, 33, 52, 0) 56%),
+                linear-gradient(70deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 68%),
+                linear-gradient(116deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 64%);
+            clip-path: polygon(0% 82%, 16% 56%, 27% 23%, 43% 33%, 58% 17%, 71% 48%, 92% 24%, 86% 56%, 99% 64%, 80% 68%, 67% 98%, 48% 72%, 34% 90%, 18% 68%, 0% 92%);
+            opacity: 0.76;
+            pointer-events: none;
+            transform-origin: 83% 75%;
+            animation: wingFlap 1.34s ease-in-out infinite, wingVeinMorph 1.34s ease-in-out infinite;
+        }
+        .dragon .detail {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .dragon .scales {
+            position: absolute;
+            left: 18px;
+            top: 14px;
+            width: 34px;
+            height: 9px;
+            border-radius: 6px;
+            background:
+                radial-gradient(circle at 50% 128%, var(--body-scale-hi) 0 2px, rgba(255, 255, 255, 0) 2.8px) 0 0 / var(--body-scale-x) var(--body-scale-y) repeat,
+                radial-gradient(circle at 50% 128%, var(--body-scale-mid) 0 2.1px, rgba(8, 14, 24, 0) 2.95px) calc(var(--body-scale-x) / 2) calc(var(--body-scale-y) / 2) / var(--body-scale-x) var(--body-scale-y) repeat,
+                radial-gradient(circle at 50% 128%, var(--body-scale-shine) 0 1.4px, rgba(255, 255, 255, 0) 2px) 1px 1px / calc(var(--body-scale-x) - 2px) calc(var(--body-scale-y) - 1px) repeat,
+                linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, 0.22) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+            opacity: var(--body-scale-opacity);
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .dragon .spines {
+            position: absolute;
+            left: 20px;
+            top: 7px;
+            width: 24px;
+            height: 7px;
+            background: linear-gradient(to right, var(--dragon-light), var(--dragon-mid));
+            clip-path: polygon(0% 100%, 10% 24%, 22% 100%, 34% 22%, 46% 100%, 58% 20%, 72% 100%, 86% 24%, 100% 100%);
+            opacity: 0.92;
+            pointer-events: none;
+        }
+        .dragon .claws {
+            position: absolute;
+            left: 23px;
+            top: 23px;
+            width: 18px;
+            height: 12px;
+            background: linear-gradient(to right, rgba(13, 20, 34, 0.92), rgba(84, 103, 132, 0.4));
+            clip-path: polygon(0% 66%, 8% 44%, 26% 30%, 50% 18%, 74% 28%, 92% 44%, 100% 68%, 100% 100%, 0% 100%);
+            border-radius: 4px;
+            box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.35);
+            opacity: 0.94;
+            transform: rotate(-13deg);
+            pointer-events: none;
+        }
+        .dragon .claws::before,
+        .dragon .claws::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            width: 100%;
+            height: 9px;
+            background:
+                linear-gradient(112deg, rgba(245, 248, 255, 0.55) 0 18%, rgba(245, 248, 255, 0) 19%) 0 0 / 6px 8px no-repeat,
+                linear-gradient(112deg, rgba(245, 248, 255, 0.52) 0 18%, rgba(245, 248, 255, 0) 19%) 6px 0 / 6px 8px no-repeat,
+                linear-gradient(112deg, rgba(245, 248, 255, 0.5) 0 18%, rgba(245, 248, 255, 0) 19%) 12px 0 / 6px 8px no-repeat,
+                linear-gradient(to bottom, rgba(11, 16, 27, 0.96), rgba(39, 51, 72, 0.88));
+            clip-path: polygon(0% 70%, 15% 8%, 23% 84%, 44% -16%, 54% 88%, 75% 12%, 86% 92%, 100% 62%, 100% 100%, 0% 100%);
+            pointer-events: none;
+        }
+        .dragon .claws::before {
+            opacity: 0.95;
+        }
+        .dragon .claws::after {
+            opacity: 0.5;
+            transform: translateY(1px) scaleY(0.85);
+            filter: blur(0.2px);
+        }
+        .dragon .snout {
+            position: absolute;
+            right: -7px;
+            top: 13px;
+            width: 19px;
+            height: 11px;
+            background: linear-gradient(to right, var(--dragon-mid), var(--dragon-light) 70%);
+            clip-path: polygon(0% 26%, 58% 8%, 100% 36%, 96% 64%, 58% 92%, 0% 72%, 14% 50%);
+            box-shadow: inset -1px -1px 0 rgba(0, 0, 0, 0.2);
+            opacity: 0.95;
+            pointer-events: none;
+            z-index: 3;
+        }
+        .dragon .jaw {
+            position: absolute;
+            right: -3px;
+            top: 19px;
+            width: 15px;
+            height: 7px;
+            background: linear-gradient(to right, rgba(20, 28, 44, 0.35), rgba(255, 255, 255, 0.22));
+            clip-path: polygon(0% 20%, 78% 8%, 100% 40%, 88% 74%, 26% 92%, 0% 70%);
+            border-bottom: 1px solid rgba(9, 13, 22, 0.35);
+            opacity: 0.88;
+            pointer-events: none;
+            z-index: 2;
+        }
+        .dragon .fire {
+            position: absolute;
+            right: -33px;
+            top: 16px;
+            width: 34px;
+            height: 10px;
+            pointer-events: none;
+            z-index: 1;
+            transform-origin: 0% 50%;
+            transform: scaleX(0.85) skewX(-6deg);
+            opacity: 0.88;
+            background: linear-gradient(to right, var(--fire-hot), var(--fire-mid) 42%, var(--fire-cool) 78%, var(--fire-smoke));
+            clip-path: polygon(0% 46%, 12% 31%, 22% 44%, 33% 14%, 45% 42%, 58% 20%, 72% 49%, 85% 32%, 100% 50%, 86% 67%, 72% 52%, 58% 82%, 46% 58%, 34% 88%, 22% 58%, 12% 72%, 0% 56%);
+            filter: drop-shadow(0 0 5px var(--fire-glow));
+            animation: fireBreath 1s ease-in-out infinite;
+        }
+        .dragon .fire::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 2px;
+            width: 18px;
+            height: 5px;
+            background: linear-gradient(to right, var(--fire-core-hot), var(--fire-core-mid), var(--fire-core-fade));
+            clip-path: polygon(0% 50%, 16% 22%, 34% 44%, 53% 14%, 70% 46%, 100% 50%, 72% 56%, 56% 88%, 34% 58%, 18% 76%);
+            opacity: 0.9;
+            animation: fireCore 0.72s ease-in-out infinite;
+        }
+        .dragon .fire::after {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: -2px;
+            width: 24px;
+            height: 14px;
+            background: radial-gradient(circle at 32% 50%, var(--fire-aura-1), rgba(255, 253, 228, 0) 60%), radial-gradient(circle at 54% 46%, var(--fire-aura-2), rgba(255, 200, 100, 0) 66%);
+            opacity: 0.75;
+            animation: fireFlicker 0.62s linear infinite;
+        }
+        .dragon .eyes {
+            position: absolute;
+            right: 5px;
+            top: 13px;
+            width: 8px;
+            height: 7px;
+            pointer-events: none;
+            z-index: 4;
+        }
+        .dragon .eyes::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 2px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0 22%, #f2f8ff 23% 48%, #24314a 49% 100%);
+            box-shadow: 0 0 3px rgba(255, 255, 255, 0.65);
+        }
+        .dragon .eyes::after {
+            content: "";
+            position: absolute;
+            right: -1px;
+            top: 0;
+            width: 7px;
+            height: 2px;
+            background: linear-gradient(to right, rgba(17, 25, 40, 0.84), rgba(17, 25, 40, 0));
+            border-radius: 2px;
+            transform: rotate(-10deg);
+            opacity: 0.9;
+        }
+        .dragon .detail::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 12px;
+            width: 16px;
+            height: 12px;
+            border-radius: 40% 60% 45% 55%;
+            background: linear-gradient(to right, var(--dragon-mid), var(--dragon-light));
+            box-shadow: inset -2px 0 0 rgba(0, 0, 0, 0.18);
+        }
+        .dragon .detail::after {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 16px;
+            width: 22px;
+            height: 8px;
+            clip-path: polygon(0% 50%, 22% 0%, 45% 52%, 68% 8%, 88% 56%, 100% 40%, 100% 70%, 78% 82%, 54% 62%, 32% 88%, 14% 64%, 0% 74%);
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.08));
+            opacity: 0.85;
+        }
+        .dragon.d1 {
+            --dragon-dark: #2c436b;
+            --dragon-mid: #8fb1ff;
+            --dragon-light: #dbe8ff;
+            --dragon-wing-mid: #9ab8ff;
+            --dragon-wing-dark: #7da0f2;
+            --dragon-glow: rgba(175, 205, 255, 0.5);
+            --dragon-size: 0.9;
+            --dragon-scale-x: 1;
+            --dragon-scale-y: 1;
+            --body-scale-x: 7px;
+            --body-scale-y: 5px;
+            --body-scale-hi: rgba(220, 236, 255, 0.34);
+            --body-scale-mid: rgba(14, 24, 48, 0.4);
+            --body-scale-shine: rgba(235, 245, 255, 0.18);
+            --body-scale-opacity: 0.76;
+            --fire-hot: #374bb9;
+            --fire-mid: #375d75;
+            --fire-cool: #3b84ff;
+            --fire-smoke: rgba(126, 170, 247, 0.377);
+            --fire-glow: rgba(109, 183, 255, 0.82);
+            --fire-core-hot: rgba(58, 59, 116, 0.96);
+            --fire-core-mid: rgba(189, 231, 255, 0.9);
+            --fire-core-fade: rgba(86, 158, 255, 0);
+            --fire-aura-1: rgba(127, 167, 190, 0.5);
+            --fire-aura-2: rgba(0, 132, 255, 0.36);
+            --dragon-layer: 4;
+        }
+        .dragon.d2 {
+            --dragon-dark: #6a1f2a;
+            --dragon-mid: #d66776;
+            --dragon-light: #864a53;
+            --dragon-wing-mid: #d47a8a;
+            --dragon-wing-dark: #b64f60;
+            --dragon-glow: rgba(223, 107, 124, 0.5);
+            --dragon-size: 1.02;
+            --dragon-scale-x: 1.12;
+            --dragon-scale-y: 1.2;
+            --body-scale-x: 9px;
+            --body-scale-y: 6px;
+            --body-scale-hi: rgba(255, 211, 217, 0.36);
+            --body-scale-mid: rgba(44, 12, 16, 0.5);
+            --body-scale-shine: rgba(255, 232, 236, 0.2);
+            --body-scale-opacity: 0.84;
+            --fire-hot: #ffe2d0;
+            --fire-mid: #ff8a5a;
+            --fire-cool: #cf2a45;
+            --fire-smoke: rgba(207, 42, 69, 0.14);
+            --fire-glow: rgba(255, 115, 92, 0.84);
+            --fire-core-hot: rgba(255, 245, 238, 0.96);
+            --fire-core-mid: rgba(255, 173, 136, 0.9);
+            --fire-core-fade: rgba(207, 54, 84, 0);
+            --fire-aura-1: rgba(255, 222, 207, 0.48);
+            --fire-aura-2: rgba(255, 134, 106, 0.36);
+            --dragon-layer: 3;
+            animation-name: borderFlight2;
+            animation-duration: 22s;
+            animation-delay: -5s;
+        }
+        .dragon.d3 {
+            --dragon-dark: #24563b;
+            --dragon-mid: #66c58f;
+            --dragon-light: #436851;
+            --dragon-wing-mid: #87d6a9;
+            --dragon-wing-dark: #4da174;
+            --dragon-glow: rgba(107, 214, 154, 0.5);
+            --dragon-size: 0.76;
+            --dragon-scale-x: 1.2;
+            --dragon-scale-y: 0.78;
+            --body-scale-x: 6px;
+            --body-scale-y: 4px;
+            --body-scale-hi: rgba(224, 255, 238, 0.28);
+            --body-scale-mid: rgba(10, 30, 20, 0.36);
+            --body-scale-shine: rgba(228, 255, 239, 0.14);
+            --body-scale-opacity: 0.68;
+            --fire-hot: #00ffaa;
+            --fire-mid: #2b8165;
+            --fire-cool: #2bbf6e;
+            --fire-smoke: rgba(43, 191, 110, 0.13);
+            --fire-glow: rgba(115, 255, 154, 0.82);
+            --fire-core-hot: rgba(153, 255, 0, 0.96);
+            --fire-core-mid: rgba(169, 255, 174, 0.9);
+            --fire-core-fade: rgba(60, 199, 115, 0);
+            --fire-aura-1: rgba(215, 255, 219, 0.5);
+            --fire-aura-2: rgba(126, 255, 163, 0.36);
+            --dragon-layer: 5;
+            animation-name: borderFlight3;
+            animation-duration: 10s;
+            animation-delay: -8s;
+        }
+        .dragon.d4 {
+            --dragon-dark: #6a5420;
+            --dragon-mid: #e3be54;
+            --dragon-light: #fff0c2;
+            --dragon-wing-mid: #e3c86e;
+            --dragon-wing-dark: #bf9b3c;
+            --dragon-glow: rgba(234, 201, 107, 0.5);
+            --dragon-size: 1.14;
+            --body-scale-x: 8px;
+            --body-scale-y: 5px;
+            --body-scale-hi: rgba(255, 240, 196, 0.38);
+            --body-scale-mid: rgba(42, 31, 8, 0.46);
+            --body-scale-shine: rgba(255, 247, 220, 0.2);
+            --body-scale-opacity: 0.82;
+            --fire-hot: #e0ce86;
+            --fire-mid: #ffd46e;
+            --fire-cool: #d89224;
+            --fire-smoke: rgba(216, 146, 36, 0.14);
+            --fire-glow: rgba(255, 197, 97, 0.82);
+            --fire-core-hot: rgba(128, 116, 50, 0.96);
+            --fire-core-mid: rgba(255, 221, 142, 0.9);
+            --fire-core-fade: rgba(224, 160, 56, 0);
+            --fire-aura-1: rgba(156, 147, 111, 0.5);
+            --fire-aura-2: rgba(255, 211, 118, 0.36);
+            --dragon-layer: 2;
+            animation-name: borderFlight4;
+            animation-duration: 18s;
+            animation-delay: -12s;
+        }
+        .dragon.d5 {
+            --dragon-dark: #050505;
+            --dragon-mid: #191919;
+            --dragon-light: #3a3a3a;
+            --dragon-wing-mid: #232323;
+            --dragon-wing-dark: #111111;
+            --dragon-glow: rgba(255, 255, 255, 0.2);
+            --dragon-size: 0.98;
+            --dragon-scale-x: 2.9;
+            --dragon-scale-y: 2.7;
+            --body-scale-x: 7px;
+            --body-scale-y: 5px;
+            --body-scale-hi: rgba(255, 255, 255, 0.2);
+            --body-scale-mid: rgba(0, 0, 0, 0.85);
+            --body-scale-shine: rgba(255, 255, 255, 0.15);
+            --body-scale-opacity: 0.8;
+            --fire-hot: #000000;
+            --fire-mid: #aaaaaa;
+            --fire-cool: #000000;
+            --fire-smoke: rgba(184, 184, 184, 0.14);
+            --fire-glow: rgba(0, 0, 0, 0.72);
+            --fire-core-hot: rgba(255, 255, 255, 0.98);
+            --fire-core-mid: rgba(0, 0, 0, 0.9);
+            --fire-core-fade: rgba(204, 204, 204, 0);
+            --fire-aura-1: rgba(0, 0, 0, 0.45);
+            --fire-aura-2: rgba(222, 222, 222, 0.34);
+            --dragon-layer: 1;
+            animation-name: borderFlight5;
+            animation-duration: 16s;
+            animation-delay: -9s;
+        }
+        .dragon.d5 .spines {
+            background: linear-gradient(to right, #ffffff, #f2f2f2);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.45);
+        }
+        .dragon.d5 .eyes::before {
+            background: radial-gradient(circle at 35% 35%, #ffffff 0 34%, #fefefe 35% 72%, #cfcfcf 73% 100%);
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.85);
+        }
+        @keyframes wingFlap {
+            0% {
+                transform: rotate(11deg) skewY(-3deg) skewX(1deg) scaleY(1) scaleX(1);
+            }
+            12% {
+                transform: rotate(4deg) skewY(-1deg) skewX(-2deg) scaleY(0.95) scaleX(1.05);
+            }
+            28% {
+                transform: rotate(-18deg) skewY(6deg) skewX(-7deg) scaleY(0.79) scaleX(1.11);
+            }
+            42% {
+                transform: rotate(-10deg) skewY(4deg) skewX(-4deg) scaleY(0.85) scaleX(1.08);
+            }
+            63% {
+                transform: rotate(2deg) skewY(1deg) skewX(0deg) scaleY(0.92) scaleX(1.03);
+            }
+            82% {
+                transform: rotate(12deg) skewY(-4deg) skewX(2deg) scaleY(1.02) scaleX(0.99);
+            }
+            100% {
+                transform: rotate(11deg) skewY(-3deg) skewX(1deg) scaleY(1) scaleX(1);
+            }
+        }
+        @keyframes tailSway {
+            0%,
+            100% {
+                transform: rotate(8deg) scaleX(1);
+            }
+            35% {
+                transform: rotate(-9deg) scaleX(1.04);
+            }
+            68% {
+                transform: rotate(4deg) scaleX(0.98);
+            }
+        }
+        @keyframes wingMembraneMorph {
+            0%, 100% {
+                clip-path: polygon(0% 80%, 12% 62%, 22% 44%, 33% 14%, 47% 30%, 59% 10%, 70% 40%, 88% 18%, 82% 50%, 100% 62%, 79% 68%, 69% 100%, 50% 74%, 35% 92%, 21% 70%, 0% 92%);
+            }
+            30% {
+                clip-path: polygon(0% 78%, 14% 60%, 24% 47%, 35% 18%, 47% 36%, 60% 15%, 72% 44%, 88% 25%, 82% 54%, 100% 66%, 79% 70%, 67% 96%, 50% 76%, 36% 88%, 20% 66%, 0% 88%);
+            }
+            52% {
+                clip-path: polygon(0% 72%, 16% 58%, 28% 50%, 40% 28%, 52% 44%, 62% 28%, 74% 52%, 90% 34%, 84% 62%, 100% 72%, 80% 74%, 67% 88%, 52% 78%, 38% 84%, 22% 70%, 0% 82%);
+            }
+            78% {
+                clip-path: polygon(0% 84%, 11% 65%, 21% 46%, 32% 15%, 46% 28%, 58% 12%, 69% 39%, 87% 19%, 81% 48%, 100% 61%, 79% 67%, 70% 99%, 51% 75%, 35% 93%, 20% 72%, 0% 93%);
+            }
+        }
+        @keyframes wingVeinMorph {
+            0%, 100% {
+                clip-path: polygon(0% 82%, 16% 56%, 27% 23%, 43% 33%, 58% 17%, 71% 48%, 92% 24%, 86% 56%, 99% 64%, 80% 68%, 67% 98%, 48% 72%, 34% 90%, 18% 68%, 0% 92%);
+            }
+            30% {
+                clip-path: polygon(0% 80%, 17% 57%, 28% 28%, 43% 37%, 58% 22%, 71% 51%, 92% 29%, 86% 59%, 99% 66%, 80% 69%, 67% 95%, 49% 73%, 35% 88%, 19% 66%, 0% 89%);
+            }
+            52% {
+                clip-path: polygon(0% 75%, 18% 58%, 30% 36%, 45% 44%, 60% 33%, 72% 55%, 92% 38%, 86% 65%, 99% 71%, 81% 73%, 67% 87%, 51% 75%, 38% 84%, 22% 70%, 0% 84%);
+            }
+            78% {
+                clip-path: polygon(0% 83%, 16% 57%, 27% 24%, 43% 34%, 58% 18%, 71% 49%, 92% 25%, 86% 57%, 99% 65%, 80% 69%, 67% 97%, 48% 73%, 34% 89%, 18% 68%, 0% 91%);
+            }
+        }
+        @keyframes fireBreath {
+            0%,
+            100% {
+                transform: scaleX(0.78) scaleY(0.88) skewX(-7deg);
+                opacity: 0.68;
+            }
+            50% {
+                transform: scaleX(1.22) scaleY(1.08) skewX(6deg);
+                opacity: 1;
+            }
+        }
+        @keyframes fireCore {
+            0%,
+            100% {
+                transform: translateX(0) scaleX(0.9);
+                opacity: 0.72;
+            }
+            50% {
+                transform: translateX(2px) scaleX(1.18);
+                opacity: 1;
+            }
+        }
+        @keyframes fireFlicker {
+            0% { transform: translateX(0) translateY(0); opacity: 0.72; }
+            33% { transform: translateX(2px) translateY(-1px); opacity: 0.95; }
+            66% { transform: translateX(1px) translateY(1px); opacity: 0.64; }
+            100% { transform: translateX(0) translateY(0); opacity: 0.72; }
+        }
+        @keyframes borderFlight1 {
+            0% { transform: translate(10px, 18px) rotate(-8deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            20% { transform: translate(calc(26vw - 14px), 8px) rotate(8deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            40% { transform: translate(calc(56vw - 28px), 16px) rotate(28deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            60% { transform: translate(calc(82vw - 46px), calc(34vh - 10px)) rotate(56deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            80% { transform: translate(calc(92vw - 62px), calc(68vh - 34px)) rotate(86deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            100% { transform: translate(calc(76vw - 42px), calc(92vh - 58px)) rotate(118deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+        }
+        @keyframes borderFlight2 {
+            0% { transform: translate(calc(88vw - 60px), 12px) rotate(18deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            20% { transform: translate(calc(96vw - 70px), calc(24vh - 8px)) rotate(42deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            40% { transform: translate(calc(84vw - 52px), calc(48vh - 20px)) rotate(74deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            60% { transform: translate(calc(60vw - 30px), calc(70vh - 34px)) rotate(110deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            80% { transform: translate(calc(30vw - 12px), calc(88vh - 54px)) rotate(146deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            100% { transform: translate(8px, calc(74vh - 42px)) rotate(182deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+        }
+        @keyframes borderFlight3 {
+            0% { transform: translate(12px, calc(62vh - 36px)) rotate(-18deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            20% { transform: translate(calc(20vw - 8px), calc(36vh - 16px)) rotate(0deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            40% { transform: translate(calc(42vw - 20px), calc(16vh - 6px)) rotate(20deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            60% { transform: translate(calc(68vw - 36px), 8px) rotate(44deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            80% { transform: translate(calc(92vw - 64px), calc(18vh - 6px)) rotate(72deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            100% { transform: translate(calc(82vw - 48px), calc(46vh - 18px)) rotate(100deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+        }
+        @keyframes borderFlight4 {
+            0% { transform: translate(calc(18vw - 10px), calc(92vh - 60px)) rotate(194deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            20% { transform: translate(calc(36vw - 18px), calc(78vh - 44px)) rotate(170deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            40% { transform: translate(calc(56vw - 28px), calc(58vh - 28px)) rotate(138deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            60% { transform: translate(calc(74vw - 42px), calc(34vh - 12px)) rotate(108deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            80% { transform: translate(calc(88vw - 58px), calc(14vh - 4px)) rotate(84deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            100% { transform: translate(calc(66vw - 34px), 8px) rotate(58deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+        }
+        @keyframes borderFlight5 {
+            0% { transform: translate(calc(48vw - 18px), calc(52vh - 24px)) rotate(30deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            20% { transform: translate(calc(60vw - 28px), calc(28vh - 12px)) rotate(54deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            40% { transform: translate(calc(74vw - 40px), calc(16vh - 6px)) rotate(78deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            60% { transform: translate(calc(88vw - 58px), calc(30vh - 10px)) rotate(104deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            80% { transform: translate(calc(70vw - 38px), calc(66vh - 28px)) rotate(132deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+            100% { transform: translate(calc(44vw - 16px), calc(84vh - 52px)) rotate(160deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
+        }
+        .wrap { position: relative; z-index: 1; }
+    </style>
+</head>
+<body>
+<div class="dragon-border" aria-hidden="true">
+    <span class="dragon d1"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
+    <span class="dragon d2"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
+    <span class="dragon d3"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
+    <span class="dragon d4"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
+    <span class="dragon d5"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
+    </div>
+    <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
         body {
