@@ -3,6 +3,10 @@
     --page-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+html {
+    background-color: #05070f;
+}
+
 @view-transition {
     navigation: auto;
 }
