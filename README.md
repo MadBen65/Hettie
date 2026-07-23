@@ -1,1 +1,2 @@
-This repo is to help me teach my kid how to write HTML and publish websites. All content is theirs.
+Hettie's Book Reviews 
+A collection of book reviews written by Hettie.with animations and imagesto help people decide what to read next. 
