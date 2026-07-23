@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../../page-fade.css">
     <script defer src="../../page-fade.js"></script>
     <title>Christopher Paolini</title>
+    <link rel="icon" type="image/png" href="../../favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
@@ -583,9 +584,74 @@
             100% { transform: translate(0, 0) rotate(360deg) scale(var(--dragon-size)) scaleX(var(--dragon-scale-x)) scaleY(var(--dragon-scale-y)); }
         }
         .wrap { position: relative; z-index: 1; }
+
+        .starfield {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .starfield span {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0 35%, rgba(255, 255, 255, 0.2) 55%, rgba(255, 255, 255, 0) 72%);
+            box-shadow:
+                0 0 8px rgba(255, 255, 255, 0.95),
+                0 0 18px rgba(189, 214, 255, 0.7),
+                0 0 30px rgba(255, 255, 255, 0.25);
+            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.95));
+            opacity: 0.78;
+            animation: starGlow 2.2s ease-in-out infinite;
+        }
+
+        .starfield span:nth-child(2n) {
+            animation-duration: 2.8s;
+            transform: scale(1.2);
+        }
+
+        .starfield span:nth-child(3n) {
+            animation-duration: 3.4s;
+            transform: scale(0.85);
+        }
+
+        .starfield .s1 { top: 8%; left: 10%; }
+        .starfield .s2 { top: 18%; right: 12%; }
+        .starfield .s3 { top: 33%; left: 18%; }
+        .starfield .s4 { top: 52%; right: 20%; }
+        .starfield .s5 { top: 71%; left: 9%; }
+        .starfield .s6 { top: 82%; right: 9%; }
+        .starfield .s7 { top: 12%; left: 50%; }
+        .starfield .s8 { top: 62%; left: 48%; }
+
+        @keyframes starGlow {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.58;
+                filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.7));
+            }
+            50% {
+                transform: scale(1.25);
+                opacity: 1;
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1)) drop-shadow(0 0 16px rgba(177, 206, 255, 0.9));
+            }
+        }
     </style>
 </head>
 <body>
+<div class="starfield" aria-hidden="true">
+    <span class="s1"></span>
+    <span class="s2"></span>
+    <span class="s3"></span>
+    <span class="s4"></span>
+    <span class="s5"></span>
+    <span class="s6"></span>
+    <span class="s7"></span>
+    <span class="s8"></span>
+</div>
 <div class="dragon-border" aria-hidden="true">
     <span class="dragon d1"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
     <span class="dragon d2"><span class="tail"></span><span class="detail"></span><span class="scales"></span><span class="wing-veins"></span><span class="spines"></span><span class="claws"></span><span class="snout"></span><span class="jaw"></span><span class="fire"></span><span class="eyes"></span></span>
