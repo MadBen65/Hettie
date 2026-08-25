@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../page-fade.css">
+    <script defer src="../../page-fade.js"></script>
+    <title>Murder Most Unladylike</title>
+    <link rel="icon" type="image/png" href="../../favicon.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Uncial+Antiqua&display=swap');
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #2f2a46;
+            color: #eef3ff;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        html::before {
+            content: "";
+            position: fixed;
+            inset: 8px;
+            border-radius: 18px;
+            box-shadow: inset 0 0 30px rgba(255, 0, 0, 0.42), inset 0 0 68px rgba(0, 255, 0, 0.18), 0 0 28px rgba(255, 255, 255, 0.92), 0 0 74px rgba(0, 0, 255, 0.3), 0 0 120px rgba(255, 255, 0, 0.2);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .wrap {
+            max-width: 1080px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav {
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .nav a {
+            color: #d9e5ff;
+            text-decoration: none;
+            font-family: "caVIlloni", cursive;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cinzel Decorative', Georgia, serif;
+        }
+
+        .hero {
+            padding: 24px 24px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+            color: #fff6c5;
+        }
+
+        .hero p {
+            margin: 0;
+            line-height: 1.6;
+            color: #e8eefc;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+        }
+
+        .star-frame {
+            position: relative;
+            display: block;
+            border-radius: 10px;
+            isolation: isolate;
+        }
+
+        .star-frame > img {
+            position: relative;
+            z-index: 3;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.35), 0 0 16px rgba(201, 220, 255, 0.22);
+        }
+
+        .star-frame::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            border-radius: 11px;
+            background:
+                radial-gradient(circle at 95% 94%, rgba(255, 255, 255, 0.98) 0 2px, transparent 2.7px),
+                radial-gradient(circle at 78% 98%, rgba(255, 255, 255, 0.96) 0 1.8px, transparent 2.4px),
+                radial-gradient(circle at 57% 98%, rgba(255, 255, 255, 0.95) 0 1.6px, transparent 2.3px),
+                radial-gradient(circle at 35% 97%, rgba(255, 255, 255, 0.97) 0 1.8px, transparent 2.4px),
+                radial-gradient(circle at 15% 98%, rgba(255, 255, 255, 0.96) 0 1.8px, transparent 2.4px),
+                radial-gradient(circle at 3% 89%, rgba(255, 255, 255, 0.98) 0 2px, transparent 2.7px),
+                radial-gradient(circle at 2% 67%, rgba(255, 255, 255, 0.95) 0 1.6px, transparent 2.3px),
+                radial-gradient(circle at 3% 45%, rgba(255, 255, 255, 0.96) 0 1.8px, transparent 2.5px),
+                radial-gradient(circle at 2% 24%, rgba(255, 255, 255, 0.95) 0 1.6px, transparent 2.3px),
+                radial-gradient(circle at 12% 3%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 31% 1%, rgba(255, 255, 255, 0.96) 0 1.5px, transparent 2.1px),
+                radial-gradient(circle at 51% 2%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 71% 2%, rgba(255, 255, 255, 0.96) 0 1.5px, transparent 2.1px),
+                radial-gradient(circle at 89% 4%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 99% 58%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 90% 99%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 48% 99%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 24% 99%, rgba(255, 255, 255, 0.96) 0 1.5px, transparent 2.1px),
+                radial-gradient(circle at 1% 78%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px),
+                radial-gradient(circle at 1% 34%, rgba(255, 255, 255, 0.94) 0 1.3px, transparent 2px);
+            z-index: 1;
+            opacity: 0.86;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.72));
+            pointer-events: none;
+        }
+
+        .star-frame::after {
+            content: "";
+            position: absolute;
+            inset: -8px;
+            border-radius: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.26), inset 0 0 10px rgba(255, 255, 255, 0.14);
+            z-index: 2;
+            opacity: 0.82;
+            pointer-events: none;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .card a {
+            color: #f8f8fa;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #ffd88c, #f3bd4b);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <nav class="nav">
+            <a href="../../index.html">Hettie's Book Reviews</a> |
+            <a href="index.html">Murder Most Unladylike Menu</a>
+        </nav>
+
+        <section class="hero">
+            <h1>Murder Most Unladylike</h1>
+            <p>Choose a title below to jump to the review page for that book.</p>
+        </section>
+
+        <section class="grid">
+            <article class="card">
+                <a href="murdermostunladylike.html"><span class="star-frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzU6aRkqyMCV2JJmTjK2pnEUnhXsRYa6DZCYYCwWuj1w&s=10" alt="Murder Most Unladylike cover"></span></a>
+                <h2>Murder Most Unladylike</h2>
+                <a href="murdermostunladylike.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <a href="arsenicfortea.html"><span class="star-frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfEDwWe8Sk1ODbSk6_sfDezYNSPCLLZ7sxN90jKFkWxQ&s=10" alt="Arsenic for Tea cover"></span></a>
+                <h2>Arsenic for Tea</h2>
+                <a href="arsenicfortea.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <a href="firstclassmurder.html"><span class="star-frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuwdxul8NMBLFJstnvwQokQU1q5oR4i8EBXyZwKN8M9Q&s=10" alt="First Class Murder cover"></span></a>
+                <h2>First Class Murder</h2>
+                <a href="firstclassmurder.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <a href="jollyfoulplay.html"><span class="star-frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8nVZnbEhIDPLScs4sCxRA9wCcx535KdEMncJnS2uACA&s=10" alt="Jolly Foul Play cover"></span></a>
+                <h2>Jolly Foul Play</h2>
+                <a href="jollyfoulplay.html">Open page</a>
+            </article>
+
+            <article class="card">
+                <a href="author.html"><span class="star-frame"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZz10Z5ZQa3iwT0EfClVGSztJJCQxP-Jth8uBLckrV9Q&s=10" alt="Author cover"></span></a>
+                <h2>Author</h2>
+                <a href="author.html">Open page</a>
+            </article>
+        </section>
+    </div>
+</body>
+</html>
