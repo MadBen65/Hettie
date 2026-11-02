@@ -8,31 +8,180 @@
     <title>Murder Most Unladylike</title>
     <link rel="icon" type="image/png" href="../../favicon.png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap');
+
         body {
+            position: relative;
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: Georgia, "Times New Roman", serif;
             background: #2f2a46;
-            color: #eef3ff;
-            padding: 24px;
+            color: #000000;
+            padding: 30px;
         }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 16px;
+            border-radius: 18px;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 7% 12%, rgba(126, 15, 15, 0.32) 0%, rgba(126, 15, 15, 0.18) 16%, transparent 27%),
+                radial-gradient(ellipse at 90% 10%, rgba(126, 15, 15, 0.28) 0%, rgba(126, 15, 15, 0.16) 18%, transparent 28%),
+                radial-gradient(ellipse at 10% 90%, rgba(126, 15, 15, 0.28) 0%, rgba(126, 15, 15, 0.18) 16%, transparent 27%),
+                radial-gradient(ellipse at 93% 88%, rgba(126, 15, 15, 0.26) 0%, rgba(126, 15, 15, 0.16) 18%, transparent 30%),
+                linear-gradient(140deg, rgba(84, 10, 10, 0.15), transparent 16%, transparent 84%, rgba(84, 10, 10, 0.15));
+            box-shadow:
+                inset 0 0 0 1px rgba(121, 17, 17, 0.18),
+                inset 0 0 20px rgba(42, 5, 5, 0.16),
+                0 0 0 1px rgba(120, 16, 16, 0.06);
+        }
+
         .wrap {
-            max-width: 900px;
+            position: relative;
+            width: 100%;
+            max-width: 1120px;
+            min-height: min(72vh, 760px);
+            box-sizing: border-box;
             margin: 0 auto;
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.25);
             border-radius: 14px;
-            padding: 24px;
+            padding: 72px clamp(24px, 6vw, 72px) 48px;
+            font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+            line-height: 1.55;
+            overflow: hidden;
+            box-shadow:
+                inset 0 0 0 1px rgba(120, 16, 16, 0.08),
+                inset 0 0 28px rgba(81, 8, 8, 0.10),
+                0 0 0 1px rgba(64, 7, 7, 0.08);
         }
-        h1, h2 { font-family: 'Cinzel Decorative', Georgia, serif; }
-        a { color: #ffd36a; }
+
+        .blood-drips {
+            position: absolute;
+            inset: 0 0 auto;
+            height: 42px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+            border-top: 3px solid #781010;
+            background: linear-gradient(180deg, rgba(91, 8, 8, 0.9), rgba(91, 8, 8, 0.18) 8px, transparent 17px);
+        }
+
+        .blood-drips span {
+            position: absolute;
+            top: -3px;
+            width: 9px;
+            height: var(--drip-length);
+            border-radius: 0 0 55% 55%;
+            background: linear-gradient(90deg, #560808, #9f1919 48%, #650b0b);
+            transform-origin: top center;
+            animation: bloodDrip 3.8s ease-in-out var(--drip-delay) infinite alternate;
+        }
+
+        .blood-drips span:nth-child(1) { left: 12%; --drip-length: 29px; --drip-delay: -1s; }
+        .blood-drips span:nth-child(2) { left: 29%; --drip-length: 18px; --drip-delay: -2.7s; }
+        .blood-drips span:nth-child(3) { left: 47%; --drip-length: 36px; --drip-delay: -0.5s; }
+        .blood-drips span:nth-child(4) { left: 73%; --drip-length: 24px; --drip-delay: -3.2s; }
+        .blood-drips span:nth-child(5) { left: 91%; --drip-length: 32px; --drip-delay: -1.8s; }
+
+        @keyframes bloodDrip {
+            from { transform: scaleY(0.82); }
+            to { transform: scaleY(1.08); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blood-drips span { animation: none; }
+        }
+
+        .wrap::before,
+        .wrap::after {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 12px;
+            pointer-events: none;
+        }
+
+        .wrap::before {
+            border: 1px solid rgba(163, 22, 22, 0.18);
+            box-shadow:
+                inset 0 0 14px rgba(82, 9, 9, 0.12),
+                inset 0 0 0 1px rgba(76, 10, 10, 0.08);
+        }
+
+        .wrap::after {
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 12% 15%, rgba(120, 18, 18, 0.22) 0%, rgba(120, 18, 18, 0.10) 12%, transparent 24%),
+                radial-gradient(ellipse at 90% 18%, rgba(120, 18, 18, 0.18) 0%, rgba(120, 18, 18, 0.08) 11%, transparent 20%),
+                radial-gradient(ellipse at 14% 80%, rgba(120, 18, 18, 0.20) 0%, rgba(120, 18, 18, 0.08) 10%, transparent 22%),
+                radial-gradient(ellipse at 82% 84%, rgba(120, 18, 18, 0.18) 0%, rgba(120, 18, 18, 0.08) 12%, transparent 24%),
+                linear-gradient(90deg, rgba(36, 2, 2, 0.08), transparent 3%, transparent 97%, rgba(36, 2, 2, 0.08));
+            mix-blend-mode: multiply;
+            opacity: 0.95;
+        }
+        h1 {
+            position: relative;
+            margin: 0 0 18px;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.5rem, 5vw, 4.4rem);
+            line-height: 0.95;
+            letter-spacing: 2px;
+            color: #e72a4d;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow:
+                0 0 2px rgba(71, 11, 11, 0.9),
+                0 0 8px rgba(255, 84, 84, 0.72),
+                0 0 18px rgba(255, 55, 55, 0.7),
+                0 0 28px rgba(212, 89, 89, 0.5),
+                0 4px 0 rgba(97, 10, 10, 0.9),
+                0 8px 18px rgba(18, 11, 33, 0.85);
+        }
+
+        h1::before {
+            content: "";
+            position: absolute;
+            inset: -12px -8px -8px -8px;
+            background: linear-gradient(180deg, rgba(255, 117, 117, 0.2), rgba(182, 74, 74, 0.12));
+            border-radius: 18px;
+            z-index: -2;
+            filter: blur(12px);
+        }
+
+        h1::after {
+            content: "Murder Most Unladylike";
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            z-index: -1;
+            color: rgba(58, 30, 8, 0.9);
+            text-shadow: none;
+            opacity: 0.82;
+        }
+
+        h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            letter-spacing: 3.0px;
+            color: #000000;
+        }
+        a { color: #000000; }
     </style>
 </head>
 <body>
     <div class="wrap">
+        <div class="blood-drips" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <h1>Murder Most Unladylike</h1>
-        <p>This page is a starter review page for the first book in the series.</p>
-        <p><strong>Summary:</strong> A clever schoolgirl detective investigates a mysterious death at a boarding school.</p>
-        <p><strong>Theme:</strong> Friendship, wit, and solving clues under pressure.</p>
+        
+        <p><strong>Summary:</strong> Daisy Wells, a perfectly normal English girl, and Hazel Wong, a clever and resourceful Chinese girl, solve 2 cunning murders amd peel away the killers lies.</p>
+        <p><strong>Theme:</strong> Not everything is always as it seems.</p>
         <p><a href="index.html">Back to the series menu</a></p>
     </div>
 </body>

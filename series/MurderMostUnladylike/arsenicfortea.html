@@ -8,11 +8,13 @@
     <title>Arsenic for Tea</title>
     <link rel="icon" type="image/png" href="../../favicon.png">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap');
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #2f2a46;
-            color: #eef3ff;
+            background: #2a462a;
+            color: #81be6f;
             padding: 24px;
         }
         .wrap {
@@ -21,18 +23,103 @@
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.25);
             border-radius: 14px;
-            padding: 24px;
+            padding: 60px 24px 24px;
+            position: relative;
         }
+
+        .blood-drips {
+            position: absolute;
+            inset: 0 0 auto;
+            height: 42px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+            border-top: 3px solid #197810;
+            background: linear-gradient(180deg, rgba(18, 91, 8, 0.9), rgba(91, 8, 8, 0.18) 8px, transparent 17px);
+        }
+
+        .blood-drips span {
+            position: absolute;
+            top: -3px;
+            width: 9px;
+            height: var(--drip-length);
+            border-radius: 0 0 55% 55%;
+            background: linear-gradient(90deg, #155608, #1d9f19 48%, #0b650b);
+            transform-origin: top center;
+            animation: bloodDrip 3.8s ease-in-out var(--drip-delay) infinite alternate;
+        }
+
+        .blood-drips span:nth-child(1) { left: 12%; --drip-length: 29px; --drip-delay: -1s; }
+        .blood-drips span:nth-child(2) { left: 29%; --drip-length: 18px; --drip-delay: -2.7s; }
+        .blood-drips span:nth-child(3) { left: 47%; --drip-length: 36px; --drip-delay: -0.5s; }
+        .blood-drips span:nth-child(4) { left: 73%; --drip-length: 24px; --drip-delay: -3.2s; }
+        .blood-drips span:nth-child(5) { left: 91%; --drip-length: 32px; --drip-delay: -1.8s; }
+
+        @keyframes bloodDrip {
+            from { transform: scaleY(0.82); }
+            to { transform: scaleY(1.08); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .blood-drips span { animation: none; }
+        }
+
         h1, h2 { font-family: 'Cinzel Decorative', Georgia, serif; }
-        a { color: #ffd36a; }
+
+        h1 {
+            position: relative;
+            display: inline-block;
+            color: #d8f28c;
+            text-shadow:
+                0 0 2px rgba(238, 255, 171, 0.9),
+                0 0 10px rgba(171, 235, 87, 0.72),
+                0 0 22px rgba(99, 194, 60, 0.42),
+                0 3px 0 rgba(26, 57, 22, 0.9);
+        }
+
+        h1::before,
+        h1::after {
+            content: "";
+            position: absolute;
+            width: 42px;
+            height: 34px;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse at 42% 42%, rgba(223, 255, 116, 0.9) 0 2px, transparent 3px),
+                radial-gradient(ellipse at 62% 28%, rgba(177, 235, 70, 0.86) 0 3px, transparent 4px),
+                radial-gradient(ellipse at 72% 66%, rgba(128, 207, 54, 0.8) 0 2px, transparent 3px),
+                radial-gradient(ellipse at 25% 72%, rgba(211, 255, 102, 0.7) 0 1.5px, transparent 3px);
+            filter: drop-shadow(0 0 5px rgba(174, 245, 76, 0.85));
+        }
+
+        h1::before {
+            top: 50%;
+            left: -34px;
+            transform: translateY(-50%) rotate(-18deg);
+        }
+
+        h1::after {
+            top: -9px;
+            right: -34px;
+            transform: rotate(22deg);
+        }
+
+        a { color: #6aff72; }
     </style>
 </head>
 <body>
     <div class="wrap">
+        <div class="blood-drips" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <h1>Arsenic for Tea</h1>
         <p>This page is a starter review page for the second book in the series.</p>
-        <p><strong>Summary:</strong> Hazel and Daisy take on another mystery involving poison, family drama, and sharp observation.</p>
-        <p><strong>Theme:</strong> Clever deduction and lively sisterly chemistry.</p>
+        <p><strong>Summary:</strong> Hazel and Daisy take on another mystery involving theivery arsenic and a rather suspicious friend.</p>
+        <p><strong>Theme:</strong> Clever deduction and teardripping family drama.</p>
         <p><a href="index.html">Back to the series menu</a></p>
     </div>
 </body>
