@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../../page-fade.css">
+	<script defer src="../../page-fade.js"></script>
+	<title>Mistletoe and Murder</title>
+	<link rel="icon" type="image/png" href="../../favicon.png">
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Schoolbell&display=swap');
+
+		body {
+			margin: 0;
+			padding: 24px;
+			font-family: Georgia, "Times New Roman", serif;
+			color: #eef3ff;
+			background: #263d35;
+		}
+
+		.wrap {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 24px;
+			border: 1px solid rgba(255, 255, 255, 0.25);
+			border-radius: 14px;
+			background: rgba(255, 255, 255, 0.08);
+		}
+
+		.screen-wire {
+			position: fixed;
+			z-index: 2;
+			left: -2vw;
+			bottom: -10vh;
+			width: 106vw;
+			height: 12dvw;
+			border-bottom: 2px transparent #080808;
+			border-radius: 0 0 50% 50%;
+			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.55);
+			pointer-events: none;
+		}
+
+		.mistletoe-garland {
+			position: relative;
+			left: 50%;
+			width: calc(100vw - 32px);
+			display: grid;
+			grid-template-columns: repeat(24, minmax(0, 1fr));
+			align-items: center;
+			row-gap: 0;
+			margin: 0 0 12px;
+			transform: translateX(-50%);
+		}
+
+		.mistletoe {
+			position: relative;
+			width: 112px;
+			height: 54px;
+			justify-self: center;
+		}
+
+		.mistletoe:nth-child(n + 25) {
+			display: none;
+		}
+
+		.mistletoe::before {
+			content: "";
+			position: absolute;
+			left: 54px;
+			top: 7px;
+			width: 3px;
+			height: 43px;
+			border-radius: 2px;
+			background: #9da968;
+			transform: rotate(25deg);
+		}
+
+		.mistletoe .leaf {
+			position: absolute;
+			width: 20px;
+			height: 34px;
+			border: 1px solid #d5d39a;
+			border-radius: 100% 0 100% 0;
+			background: linear-gradient(135deg, #d9dfa0, #84965d 65%, #536d4c);
+			box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		.mistletoe .leaf:nth-child(1) { left: 19px; top: 7px; transform: rotate(-48deg); }
+		.mistletoe .leaf:nth-child(2) { left: 33px; top: 15px; transform: rotate(34deg) scaleX(-1); }
+		.mistletoe .leaf:nth-child(3) { left: 48px; top: 1px; transform: rotate(-42deg); }
+		.mistletoe .leaf:nth-child(4) { left: 61px; top: 17px; transform: rotate(36deg) scaleX(-1); }
+		.mistletoe .leaf:nth-child(5) { left: 77px; top: 4px; transform: rotate(-38deg); }
+		.mistletoe .leaf:nth-child(6) { left: 83px; top: 23px; transform: rotate(42deg) scaleX(-1); }
+
+		.mistletoe .berries {
+			position: absolute;
+			left: 47px;
+			top: 22px;
+			width: 28px;
+			height: 24px;
+			border-radius: 50%;
+			background:
+				radial-gradient(circle at 34% 30%, #df3030 0 1px, #f8f0d7 2px, #c8c0a3 5px, transparent 6px),
+				radial-gradient(circle at 75% 65%, #fff8df 0 1px, #eee5c8 2px, #bdb496 5px, transparent 6px),
+				radial-gradient(circle at 30% 90%, #fff8df 0 1px, #e6ddbf 2px, #aaa486 5px, transparent 6px);
+		}
+
+		@media (max-width: 1399px) {
+			.mistletoe-garland {
+				grid-template-columns: repeat(16, minmax(0, 1fr));
+			}
+
+			.mistletoe:nth-child(n + 17) {
+				display: none;
+			}
+		}
+
+		@media (max-width: 760px) {
+			.mistletoe-garland {
+				grid-template-columns: repeat(6, minmax(0, 1fr));
+			}
+
+			.mistletoe:nth-child(n + 7) {
+				display: none;
+			}
+		}
+
+		@media (max-width: 420px) {
+			.mistletoe-garland {
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+			}
+
+			.mistletoe:nth-child(n + 4) {
+				display: none;
+			}
+		}
+
+		h1, h2 {
+			font-family: Georgia, "Times New Roman", serif;
+			color: #f0d48a;
+		}
+
+		h1 {
+			font-family: "Schoolbell", cursive;
+			font-size: clamp(2.2rem, 5vw, 3.6rem);
+			line-height: 1.15;
+			text-align: center;
+		}
+
+		a {
+			color: #f0d48a;
+		}
+	</style>
+</head>
+<body>
+	<div class="screen-wire" aria-hidden="true"></div>
+	<main class="wrap">
+		<div class="mistletoe-garland" aria-hidden="true">
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+			<div class="mistletoe"><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="berries"></span></div>
+		</div>
+		<h1>Mistletoe and Murder</h1>
+		<p><strong>Summary:</strong> The two detectives go to cambridge for christmas and then a inheritance murder took place.</p>
+		<p><strong>Theme:</strong> inheritance murders disguised as pranks and a forgotten relative.</p>
+		<p><a href="index.html">Back to the series menu</a></p>
+	</main>
+</body>
+</html>

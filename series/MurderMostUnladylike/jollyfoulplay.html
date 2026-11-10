@@ -10,16 +10,183 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
 
-        body { margin: 0; font-family: Arial, sans-serif; background: #2a2c46; color: #eef3ff; padding: 24px; }
-        .wrap { max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; padding: 24px; }
+        body { position: relative; min-height: 100vh; box-sizing: border-box; margin: 0; font-family: Arial, sans-serif; background: #46372a; color: #fff6ee; padding: 24px; }
+        .fireworks {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .fireworks .burst {
+            position: absolute;
+            width: 140px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            opacity: 0;
+            background:
+                radial-gradient(circle at 50% 4%, #ffbdbd 0 2px, transparent 4px),
+                radial-gradient(circle at 73% 10%, var(--spark) 0 2px, transparent 4px),
+                radial-gradient(circle at 90% 27%, #ffe0bd 0 2px, transparent 4px),
+                radial-gradient(circle at 96% 50%, var(--spark) 0 2px, transparent 4px),
+                radial-gradient(circle at 90% 73%, #fff5bd 0 2px, transparent 4px),
+                radial-gradient(circle at 73% 90%, var(--spark) 0 2px, transparent 4px),
+                radial-gradient(circle at 50% 96%, #bdffc0 0 2px, transparent 4px),
+                radial-gradient(circle at 27% 90%, var(--spark) 0 2px, transparent 4px),
+                radial-gradient(circle at 10% 73%, #bdf2ff 0 2px, transparent 4px),
+                radial-gradient(circle at 4% 50%, var(--spark) 0 2px, transparent 4px),
+                radial-gradient(circle at 10% 27%, #cfbdff 0 2px, transparent 4px),
+                radial-gradient(circle at 27% 10%, var(--spark) 0 2px, transparent 4px),
+                radial-gradient(circle, var(--spark) 0 3px, transparent 6px);
+            filter: drop-shadow(0 0 9px var(--spark));
+            animation: fireworkBurst 4.8s ease-out infinite;
+        }
+        .fireworks .burst::before {
+            content: "";
+            position: absolute;
+            inset: -8%;
+            border-radius: 50%;
+            background: repeating-conic-gradient(
+                from 2deg,
+                var(--spark) 0deg 1.5deg,
+                transparent 1.5deg 15deg
+            );
+            mask: radial-gradient(circle, transparent 0 16%, #0000006c 19% 82%, transparent 86%);
+            opacity: 0.35;
+            filter: drop-shadow(0 0 4px var(--spark));
+        }
+        .fireworks .burst:nth-child(1) { top: 8%; left: 12%; --spark: #ffd166; animation-delay: 0s; }
+        .fireworks .burst:nth-child(2) { top: 17%; right: 12%; --spark: #ff8296; animation-delay: 1.2s; }
+        .fireworks .burst:nth-child(3) { top: 57%; left: 6%; --spark: #8ee3f5; animation-delay: 2.4s; }
+        .fireworks .burst:nth-child(4) { top: 64%; right: 8%; --spark: #c8f07a; animation-delay: 3.6s; }
+        @keyframes fireworkBurst {
+            0%, 12% { opacity: 0; transform: scale(0.25) rotate(0deg); }
+            28% { opacity: 0.9; }
+            58% { opacity: 0.65; transform: scale(1) rotate(18deg); }
+            100% { opacity: 0; transform: scale(1.18) rotate(36deg); }
+        }
+        .fireworks .spark-trail {
+            position: absolute;
+            width: 140px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            opacity: 0;
+            background:
+                radial-gradient(circle at 50% 4%, #fff5bd 0 1.5px, transparent 3px),
+                radial-gradient(circle at 73% 10%, var(--spark) 0 1.5px, transparent 3px),
+                radial-gradient(circle at 90% 27%, #fff5bd 0 1.5px, transparent 3px),
+                radial-gradient(circle at 96% 50%, var(--spark) 0 1.5px, transparent 3px),
+                radial-gradient(circle at 90% 73%, #fff5bd 0 1.5px, transparent 3px),
+                radial-gradient(circle at 73% 90%, var(--spark) 0 1.5px, transparent 3px),
+                radial-gradient(circle at 50% 96%, #fff5bd 0 1.5px, transparent 3px),
+                radial-gradient(circle at 27% 90%, var(--spark) 0 1.5px, transparent 3px),
+                radial-gradient(circle at 10% 73%, #fff5bd 0 1.5px, transparent 3px),
+                radial-gradient(circle at 4% 50%, var(--spark) 0 1.5px, transparent 3px),
+                radial-gradient(circle at 10% 27%, #fff5bd 0 1.5px, transparent 3px),
+                radial-gradient(circle at 27% 10%, var(--spark) 0 1.5px, transparent 3px);
+            filter: drop-shadow(0 0 5px var(--spark));
+            animation: sparkTrail 7.2s ease-out infinite;
+        }
+        .fireworks .spark-trail:nth-child(5) { top: 8%; left: 12%; --spark: #ffd166; animation-delay: 0s; }
+        .fireworks .spark-trail:nth-child(6) { top: 17%; right: 12%; --spark: #ff8296; animation-delay: 1.2s; }
+        .fireworks .spark-trail:nth-child(7) { top: 57%; left: 6%; --spark: #8ee3f5; animation-delay: 2.4s; }
+        .fireworks .spark-trail:nth-child(8) { top: 64%; right: 8%; --spark: #c8f07a; animation-delay: 3.6s; }
+        @keyframes sparkTrail {
+            0%, 18% { opacity: 0; transform: scale(0.45); }
+            30% { opacity: 0.55; }
+            58% { opacity: 0.38; transform: scale(1.08); }
+            100% { opacity: 0; transform: scale(1.35); }
+        }
+        .hockey-stick {
+            position: fixed;
+            right: max(8px, 3vw);
+            bottom: -28px;
+            z-index: 2;
+            width: 140px;
+            height: 286px;
+            pointer-events: none;
+            transform: rotate(12deg);
+            filter: drop-shadow(3px 2px 5px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 3px rgba(255, 232, 186, 0.7));
+        }
+        .hockey-stick .shaft {
+            position: absolute;
+            right: 47px;
+            bottom: 24px;
+            width: 11px;
+            height: 300px;
+            border: 1px solid #c8c4ba;
+            border-radius: 5px 5px 1px 1px;
+            background: linear-gradient(90deg, #111315 0%, #555b60 26%, #171a1c 54%, #777b7e 72%, #151719 100%);
+        }
+        .hockey-stick .blade {
+            position: absolute;
+            left: 1px;
+            bottom: 14px;
+            width: 112px;
+            height: 35px;
+            border: 1px solid #b8b5ae;
+            border-radius: 58% 42% 42% 58% / 72% 58% 58% 72%;
+            background: linear-gradient(180deg, #777b7e 0%, #363a3d 42%, #17191b 100%);
+        }
+        .hockey-stick .blade::before {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 8px;
+            width: 31px;
+            height: 8px;
+            border-radius: 60% 35% 55% 40%;
+            background: linear-gradient(90deg, #5b080d, #a51620 55%, #690b12);
+            transform: rotate(-12deg);
+        }
+        .hockey-stick .blade::after {
+            content: "";
+            position: absolute;
+            left: 14px;
+            top: 16px;
+            width: 5px;
+            height: 10px;
+            border-radius: 50% 50% 60% 60%;
+            background: #8d1019;
+            box-shadow: 12px 3px 0 -1px #6f0b12, 21px -1px 0 -2px #a51620;
+        }
+        .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; background: rgba(255,255,255,0.08); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 14px; padding: 24px; }
         h1 { font-family: 'Violent Desire', 'Metal Mania', fantasy; }
-        a { color: #6a74ff; }
+        a { color: #ffb26af3; }
+
+        @media (max-width: 1100px) {
+            .hockey-stick {
+                right: -8px;
+                transform: rotate(12deg) scale(0.7);
+                transform-origin: bottom right;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .fireworks .burst { animation: none; opacity: 0.55; transform: none; }
+            .fireworks .spark-trail { animation: none; opacity: 0.3; transform: none; }
+        }
     </style>
 </head>
 <body>
+    <div class="fireworks" aria-hidden="true">
+        <span class="burst"></span>
+        <span class="burst"></span>
+        <span class="burst"></span>
+        <span class="burst"></span>
+        <span class="spark-trail"></span>
+        <span class="spark-trail"></span>
+        <span class="spark-trail"></span>
+        <span class="spark-trail"></span>
+    </div>
+    <div class="hockey-stick" aria-hidden="true">
+        <span class="shaft"></span>
+        <span class="blade"></span>
+    </div>
     <div class="wrap">
         <h1>Jolly Foul Play </h1>
-        <p>This page is ready for the fourth book review.</p>
+        <p><strong>Summary:</strong> The 2 detectives go back to their school to be greeted by a seemingly impossible murder.</p>
+        <p><strong>Theme:</strong> Mystery and school life intertwined with suspense.</p>
         <p><a href="index.html">Back to the series menu</a></p>
     </div>
 </body>
